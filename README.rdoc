@@ -1,28 +1,5 @@
-== README
+== FHIR Client
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Rails 4.x app, with a recommended Ruby version of 2.1.2. To install locally, clone this repository, make sure Ruby is installed along with the Bundler gem, and then run `bundle install`.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+To deploy, add your public key to the `railsdeploy@idp-p.mitre.org` user's list of authorized keys, add `railsdeploy@idp-p:/var/www/rails/fhir-client` as a git remote with the name of "production", and run `git push production master` to push the code in the master branch to the production remote, which will also restart the server.
