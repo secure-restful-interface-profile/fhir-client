@@ -32,6 +32,9 @@ GEM
     attr_required (1.0.0)
     bindata (2.1.0)
     builder (3.2.2)
+    byebug (2.7.0)
+      columnize (~> 0.3)
+      debugger-linecache (~> 1.2)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -39,6 +42,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    columnize (0.8.9)
+    debugger-linecache (1.2.0)
     erubis (2.7.0)
     execjs (2.2.1)
     hashie (3.3.1)
@@ -161,6 +166,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails
