@@ -6,6 +6,8 @@ class AuthenticationsController < ActionController::Base
 
 
   def create
+    Rails.logger.debug "========== Begin callback redirection from identity provider =========="
+
     %w(auth origin params strategy).each do |x|
       puts x, request.env["omniauth.#{x}"].inspect
     end
@@ -18,8 +20,7 @@ class AuthenticationsController < ActionController::Base
       raise token
     end
 
-
-
+    Rails.logger.debug "========== End callback redirection from identity provider =========="
 
     # authentication = Authentication.where(provider: omniauth['provider'], uid: omniauth['uid']).first
 
@@ -48,12 +49,14 @@ class AuthenticationsController < ActionController::Base
   end
 
   def setup
+    Rails.logger.debug "========== Begin setup =========="
+
     # byebug
     private_key = OpenSSL::PKey::RSA.new File.read Rails.root.join('config', 'client.key')
     now = Time.now.to_i
     claim = {
-      iss: '030e247e-4b5c-4fe8-a7a1-ea1d583deee7', # Client ID
-      sub: '030e247e-4b5c-4fe8-a7a1-ea1d583deee7', # Client ID
+      iss: 'cd2618f8-a2fd-4770-8d9a-6dc70db9c068', # Client ID
+      sub: 'cd2618f8-a2fd-4770-8d9a-6dc70db9c068', # Client ID
       aud: 'https://idp-p.mitre.org/token',
       iat: now,
       exp: now + 60,
@@ -63,6 +66,8 @@ class AuthenticationsController < ActionController::Base
     request.env['omniauth.strategy'].options[:client_options][:client_assertion] = jws
     puts request.env['omniauth.strategy'].options.inspect
     render :text => "Omniauth setup phase.", :status => 404
+
+    Rails.logger.debug "========== End setup =========="
   end
 
   # def destroy
