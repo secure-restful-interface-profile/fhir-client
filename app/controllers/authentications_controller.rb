@@ -1,18 +1,19 @@
 class AuthenticationsController < ActionController::Base
   # layout "application"
+
   # def index
   #   @authentications = current_user.authentications if current_user
   # end
-
 
   def create
     Rails.logger.debug "========== Begin callback redirection from identity provider =========="
 
     %w(auth origin params strategy).each do |x|
-      puts x, request.env["omniauth.#{x}"].inspect
+      Rails.logger.debug "------ #{x}, #{request.env["omniauth.#{x}"].inspec} ------"
     end
 
     omniauth = request.env['omniauth.auth']
+    Rails.logger.debug "------ omniauth = #{omniauth.inspect} ------"
 
     # FIXME what error handling needs to go here?
     if omniauth[:provider] == :idpp
@@ -53,7 +54,10 @@ class AuthenticationsController < ActionController::Base
 
     # byebug
     private_key = OpenSSL::PKey::RSA.new File.read Rails.root.join('config', 'client.key')
+    Rails.logger.debug "------ private_key = #{private_key} ------"
+
     now = Time.now.to_i
+
     claim = {
       iss: 'cd2618f8-a2fd-4770-8d9a-6dc70db9c068', # Client ID
       sub: 'cd2618f8-a2fd-4770-8d9a-6dc70db9c068', # Client ID
@@ -62,9 +66,13 @@ class AuthenticationsController < ActionController::Base
       exp: now + 60,
       jti: "#{now}/#{SecureRandom.hex(18)}"
     }
+
     jws = JSON::JWT.new(claim).sign(private_key, 'RS256')
+    Rails.logger.debug "------ jws = #{jws} ------"
+
     request.env['omniauth.strategy'].options[:client_options][:client_assertion] = jws
-    puts request.env['omniauth.strategy'].options.inspect
+    Rails.logger.debug "------ omniauth.strategy = #{request.env['omniauth.strategy'].options.inspect} ------"
+
     render :text => "Omniauth setup phase.", :status => 404
 
     Rails.logger.debug "========== End setup =========="
