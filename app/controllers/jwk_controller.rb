@@ -1,8 +1,18 @@
 class JwkController < ApplicationController
+
   respond_to :json
+
   def jwk
-    pubkey = OpenSSL::PKey::RSA.new File.read Rails.root.join('config', 'client.pub')
-    jwk = JSON::JWK.new pubkey
-    respond_with JSON::JWK::Set.new(jwk)
+    Rails.logger.debug "========== Begin JWKS endpoint =========="
+    jwk = JSON::JWK.new(Application.public_key)
+
+    jwks = Hash.new
+    jwks["keys"] = JSON::JWK::Set.new(jwk)
+
+    Rails.logger.debug "------ JWKS = #{jwks} ------"
+    Rails.logger.debug "========== End JWK endpoint =========="
+
+    respond_with jwks
   end
+
 end
