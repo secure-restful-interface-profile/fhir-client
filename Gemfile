@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'omniauth'
 gem 'omniauth-openid-connect'
+#gem 'rack-oauth2'
+gem 'rack-oauth2', :git => "https://github.com/dhill/rack-oauth2.git"
 
 gem 'byebug'
 

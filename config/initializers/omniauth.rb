@@ -38,9 +38,10 @@ OIDC = lambda do |env|
   byebug
   env['omniauth.strategy'].options[:discovery] = true
   env['omniauth.strategy'].options[:client_options] = {
-    host: "idp-p.mitre.org",
-    identifier: PROVIDERS[:idpp][:client_id],
-    secret: PROVIDERS[:idpp][:client_secret]
+    host:                 "idp-p.mitre.org",
+    identifier:           PROVIDERS[:idpp][:client_id],
+    private_key:          Application.private_key,
+    client_auth_method:   :signed_jwt
   }
 end
 
