@@ -56,8 +56,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       host:                   "idp-p.mitre.org",
       identifier:             PROVIDERS[:idpp][:client_id],
       grant_type:             'authorization_code',
-      client_assertion_type:  'urn:ietf:params:oauth:client-assertion-type:jwt-bearer'
-      private_key:            Application.private_key
+      client_assertion_type:  'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+      private_key:            Application.private_key,
       client_auth_method:     :signed_jwt
     }
   }
