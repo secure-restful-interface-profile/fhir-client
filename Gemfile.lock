@@ -1,8 +1,9 @@
 GIT
   remote: https://github.com/dhill/omniauth-openid-connect.git
-  revision: 9329b9df453782628e0dd8e3bb6e53ebcf79354d
+  revision: 7d77e9d0386b8424c627e888e81b0964dde7d30a
+  branch: jwt-auth
   specs:
-    omniauth-openid-connect (0.2.0)
+    omniauth-openid-connect (0.1.0)
       addressable (~> 2.3)
       omniauth (~> 1.1)
       openid_connect (= 0.7.3)

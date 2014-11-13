@@ -79,7 +79,7 @@ class AuthenticationsController < ActionController::Base
     request.env['omniauth.strategy'].options[:client_options][:client_assertion] = jws
     Rails.logger.debug "------ omniauth.strategy = #{request.env['omniauth.strategy'].options.inspect} ------"
 
-    render :text => "Omniauth setup phase.", :status => 404
+    render :text => "Omniauth setup phase.", :status => 200
 
     Rails.logger.debug "========== End setup =========="
   end
