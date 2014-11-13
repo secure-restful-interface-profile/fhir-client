@@ -1,8 +1,17 @@
 GIT
-  remote: https://github.com/dhill/rack-oauth2.git
-  revision: 1d052bbc3dedb669c8fa6ecd89d2e6dd3a377f5b
+  remote: https://github.com/dhill/omniauth-openid-connect.git
+  revision: 9329b9df453782628e0dd8e3bb6e53ebcf79354d
   specs:
-    rack-oauth2 (1.0.8)
+    omniauth-openid-connect (0.2.0)
+      addressable (~> 2.3)
+      omniauth (~> 1.1)
+      openid_connect (= 0.7.3)
+
+GIT
+  remote: https://github.com/dhill/rack-oauth2.git
+  revision: d676ce500c9be239a6fd6631639c8a9504587983
+  specs:
+    rack-oauth2 (1.0.8.1)
       activesupport (>= 2.3)
       attr_required (>= 0.0.5)
       httpclient (>= 2.4)
@@ -60,7 +69,7 @@ GEM
     execjs (2.2.1)
     hashie (3.3.1)
     hike (1.2.3)
-    httpclient (2.4.0)
+    httpclient (2.5.3.2)
     i18n (0.6.11)
     jbuilder (2.1.3)
       activesupport (>= 3.0.0, < 5)
@@ -85,10 +94,6 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
-    omniauth-openid-connect (0.1.0)
-      addressable (~> 2.3)
-      omniauth (~> 1.1)
-      openid_connect (= 0.7.3)
     openid_connect (0.7.3)
       activemodel
       attr_required (>= 0.0.5)
@@ -166,7 +171,7 @@ GEM
     validate_email (0.1.6)
       activemodel (>= 3.0)
       mail (>= 2.2.5)
-    validate_url (0.2.2)
+    validate_url (1.0.0)
       activemodel (>= 3.0.0)
       addressable
     webfinger (1.0.0)
@@ -183,8 +188,8 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   omniauth
-  omniauth-openid-connect
-  rack-oauth2!
+  omniauth-openid-connect!
+  rack-oauth2 (= 1.0.8.1)!
   rails (= 4.1.6)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
