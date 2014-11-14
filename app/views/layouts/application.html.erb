@@ -7,6 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if current_user %>
+  Signed in as <%= current_user.name %>!
+<% else %>
+  <%= link_to "Sign in", "/auth/idpp" %>
+<% end %>
 
 <%= yield %>
 

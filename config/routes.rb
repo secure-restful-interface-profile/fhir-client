@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get '/auth/:provider/callback', to: 'authentications#create'
-  get '/auth/:provider/setup', to: 'authentications#setup'
+  get '/auth/:provider/callback', to: 'sessions#create'
+  get '/auth/:provider/setup', to: 'sessions#setup'
   get '/jwk', to: 'jwk#jwk'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -3,7 +3,7 @@
 #
 # <description>
 
-class AuthenticationsController < ActionController::Base
+class SessionsController < ActionController::Base
 
   # layout "application"
 
@@ -28,13 +28,12 @@ class AuthenticationsController < ActionController::Base
     omniauth = request.env['omniauth.auth']
     Rails.logger.debug "------ omniauth = #{omniauth.inspect} ------"
 
-    # FIXME what error handling needs to go here?
-    if omniauth[:provider] == :idpp
-      token = omniauth[:credentials][:token]
-      raise token
-    end
+    user = User.from_omniauth(omniauth)
+    session[:user_id] = user.id
 
     Rails.logger.debug "========== End callback redirection from identity provider =========="
+
+    redirect to root_url, notice: "Signed in!"
 
     # authentication = Authentication.where(provider: omniauth['provider'], uid: omniauth['uid']).first
 
