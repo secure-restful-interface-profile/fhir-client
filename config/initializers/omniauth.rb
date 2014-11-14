@@ -22,4 +22,32 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       client_auth_method:     "signed_jwt"
     }
   }
+
+  provider :openid_connect, {
+    name: :idpva,
+    discovery: true,
+    setup: true,
+    client_options: {
+      host:                   "idp-va.mitre.org",
+      identifier:             PROVIDERS[:idpva][:client_id],
+      grant_type:             'authorization_code',
+      client_assertion_type:  'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+      private_key:            Application.private_key,
+      client_auth_method:     "signed_jwt"
+    }
+  }
+
+  provider :openid_connect, {
+    name: :idper,
+    discovery: true,
+    setup: true,
+    client_options: {
+      host:                   "idp-er.mitre.org",
+      identifier:             PROVIDERS[:idper][:client_id],
+      grant_type:             'authorization_code',
+      client_assertion_type:  'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+      private_key:            Application.private_key,
+      client_auth_method:     "signed_jwt"
+    }
+  }
 end
