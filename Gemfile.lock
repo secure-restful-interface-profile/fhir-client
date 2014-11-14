@@ -10,10 +10,10 @@ GIT
 
 GIT
   remote: https://github.com/dhill/rack-oauth2.git
-  revision: 7bcda428eea177a9e9d5b6c18341844cbc483807
+  revision: fca59ae78096bf00b69e7feabfbe882dff8ab86f
   branch: jwt-auth
   specs:
-    rack-oauth2 (1.0.8.4)
+    rack-oauth2 (1.0.8.5)
       activesupport (>= 2.3)
       attr_required (>= 0.0.5)
       httpclient (>= 2.4)
@@ -191,7 +191,7 @@ DEPENDENCIES
   jquery-rails
   omniauth
   omniauth-openid-connect (= 0.1.0.2)!
-  rack-oauth2 (= 1.0.8.4)!
+  rack-oauth2 (= 1.0.8.5)!
   rails (= 4.1.6)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
