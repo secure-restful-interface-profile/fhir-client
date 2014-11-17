@@ -35,7 +35,6 @@ gem 'spring',        group: :development
 
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
-gem 'protected_attributes'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

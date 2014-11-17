@@ -28,7 +28,7 @@ class SessionsController < ActionController::Base
     omniauth = request.env['omniauth.auth']
     Rails.logger.debug "------ omniauth = #{omniauth.inspect} ------"
 
-    user = User.from_omniauth(omniauth)
+    user = user_from_omniauth(omniauth)
     session[:user_id] = user.id
 
     Rails.logger.debug "========== End callback redirection from identity provider =========="
@@ -146,4 +146,25 @@ class SessionsController < ActionController::Base
     }
   end
 
+  #-------------------------------------------------------------------------------
+ 
+  def user_from_omniauth(auth)
+    User.where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
+  end
+
+  #-------------------------------------------------------------------------------
+ 
+  def create_from_omniauth(auth)
+    User.create! do |user|
+      user.provider   = auth["provider"]
+      user.uid        = auth["uid"]
+      user.name       = auth["info"]["nickname"]
+    end
+  end
+  
+  #-------------------------------------------------------------------------------
+ 
+  def user_params
+    params.require(:user).permit(:provider, :uid, :name)
+  end
 end
