@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'omniauth'
-gem 'omniauth-openid-connect', '0.1.0.2', :git => "https://github.com/dhill/omniauth-openid-connect.git", :branch => "jwt-auth"
+gem 'omniauth-openid-connect', '0.1.0.3', :git => "https://github.com/dhill/omniauth-openid-connect.git", :branch => "jwt-auth"
 #gem 'rack-oauth2'
 gem 'rack-oauth2', '1.0.8.7', :git => "https://github.com/dhill/rack-oauth2.git", :branch => "jwt-auth"
 

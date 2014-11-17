@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/dhill/omniauth-openid-connect.git
-  revision: a73cb4987665f796b2cbe5efdc7133527d88742b
+  revision: f59f3d1260864e8e4c30ee6ced7c2cf9ca176308
   branch: jwt-auth
   specs:
-    omniauth-openid-connect (0.1.0.2)
+    omniauth-openid-connect (0.1.0.3)
       addressable (~> 2.3)
       omniauth (~> 1.1)
       openid_connect (= 0.7.3)
@@ -202,7 +202,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   omniauth
-  omniauth-openid-connect (= 0.1.0.2)!
+  omniauth-openid-connect (= 0.1.0.3)!
   rack-oauth2 (= 1.0.8.7)!
   rails (= 4.1.6)
   sass-rails (~> 4.0.3)

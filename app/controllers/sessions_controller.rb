@@ -34,7 +34,7 @@ class SessionsController < ActionController::Base
 
     Rails.logger.debug "========== End callback redirection from identity provider =========="
 
-    redirect to root_url, notice: "Signed in!"
+    redirect_to root_url, notice: "Signed in!"
 
     # authentication = Authentication.where(provider: omniauth['provider'], uid: omniauth['uid']).first
 
