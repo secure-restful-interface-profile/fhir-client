@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get '/auth/:provider/setup', to: 'sessions#setup'
   get '/jwk', to: 'jwk#jwk'
 
+  delete '/signout', to: 'sessions#destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
