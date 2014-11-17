@@ -155,16 +155,13 @@ class SessionsController < ActionController::Base
   #-------------------------------------------------------------------------------
  
   def create_from_omniauth(auth)
-    User.create! do |user|
-      user.provider   = auth["provider"]
-      user.uid        = auth["uid"]
-      user.name       = auth["info"]["nickname"]
-    end
+    raw_parameters = {
+      :provider => auth["provider"]
+      :uid => auth["uid"]
+      :name => auth["info"]["nickname"]
+    }
+    parameters = ActionController::Parameters.new(raw_parameters)
+    User.create!(parameters.permit(:provider, :uid, :name))
   end
   
-  #-------------------------------------------------------------------------------
- 
-  def user_params
-    params.require(:user).permit(:provider, :uid, :name)
-  end
 end
