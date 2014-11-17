@@ -86,12 +86,14 @@ class SessionsController < ActionController::Base
 
   #-------------------------------------------------------------------------------
 
-  # def destroy
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_url, notice: "Signed out!"
   #   @authentication = current_user.authentications.find(params[:id])
   #   @authentication.destroy
   #   flash[:notice] = "Successfully destroyed authentication."
   #   redirect_to authentications_url
-  # end
+  end
 
   #-------------------------------------------------------------------------------
   protected
