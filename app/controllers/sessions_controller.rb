@@ -156,8 +156,8 @@ class SessionsController < ActionController::Base
  
   def create_from_omniauth(auth)
     raw_parameters = {
-      :provider => auth["provider"]
-      :uid => auth["uid"]
+      :provider => auth["provider"],
+      :uid => auth["uid"],
       :name => auth["info"]["nickname"]
     }
     parameters = ActionController::Parameters.new(raw_parameters)
