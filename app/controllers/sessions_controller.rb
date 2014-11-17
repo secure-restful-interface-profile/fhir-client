@@ -149,7 +149,8 @@ class SessionsController < ActionController::Base
   #-------------------------------------------------------------------------------
  
   def user_from_omniauth(auth)
-    User.where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
+    Rails.logger.debug "--- auth.slice(...) = #{auth.slice("provider", "uid")} ---"
+    User.where(auth.slice("provider", "uid")).first #  || create_from_omniauth(auth)
   end
 
   #-------------------------------------------------------------------------------
