@@ -10,9 +10,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   #provider :developer unless Rails.env.production?
   # provider :openid_connect, name: :idpp, discovery: true, setup: true
   provider :openid_connect, {
-    name: :idpp,
-    discovery: true,
-    setup: true,
+    name:                     :idpp,
+    discovery:                true,
+    setup:                    true,
+    scope:                    [ :openid, :profile, :email ],
+    
     client_options: {
       host:                   "idp-p.mitre.org",
       identifier:             PROVIDERS[:idpp][:client_id],
