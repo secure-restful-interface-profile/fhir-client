@@ -41,7 +41,7 @@ class RecordsController < ApplicationController
       code = params["code"]
 
       token_response = authorization_server.get auth_server_config["token_endpoint"] do |request|
-        request.body {
+        request.body = {
           "client_id"                 => Application.client_id,
           "client_assertion_type"     => "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
           "client_assertion"          => jwt_token(jwt_token_endpoint_claims),
