@@ -13,7 +13,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     name:                     :idpp,
     discovery:                true,
     setup:                    true,
-    scope:                    [ :openid, :profile, :email ],
+    scope:                    [ :openid, :email ],
     
     client_options: {
       host:                   "idp-p.mitre.org",
