@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  get '/auth/:provider/callback', to: 'sessions#create'
-  get '/auth/:provider/setup', to: 'sessions#setup'
-  get '/jwk', to: 'jwk#jwk'
+  get '/auth/:provider/callback',     to: 'sessions#create'
+  get '/auth/:provider/setup',        to: 'sessions#setup'
+  get '/jwk',                         to: 'jwk#jwk'
 
-  delete '/signout', to: 'sessions#destroy'
+  delete '/signout',                  to: 'sessions#destroy'
+
+  get '/records',                     to: 'records#index'
+  get '/auth_endpoint_callback',      to: 'records#auth_endpoint_callback'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

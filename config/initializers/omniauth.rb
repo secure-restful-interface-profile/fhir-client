@@ -1,4 +1,4 @@
-PROVIDERS = YAML.load_file(Rails.root.join('config', 'providers.yaml'))[Rails.env].with_indifferent_access
+PROVIDERS = YAML.load_file(Rails.root.join('config', 'providers.yml'))[Rails.env].with_indifferent_access
 
 # Use the system cert store in order to use local certs
 Rack::OAuth2.http_config do |http_client|
@@ -25,3 +25,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     }
   }
 end
+
+AUTH_SERVER = AuthorizationServer.new("https://as-va.mitre.org", PROVIDERS[:asva][:client_id])

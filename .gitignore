@@ -22,4 +22,4 @@
 /config/*.pub
 
 # Ignore provider configuration - this should be configured directly on the production machine.
-/config/providers.yaml
+/config/providers.yml
