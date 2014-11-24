@@ -1,60 +1,66 @@
+##
+# = ResourceServer model
+#
+# This class manages the interface to the Protected Resource Server.
+
 class ResourceServer
 
   ##
-  # This method initializes a new instance of the AuthorizationServer class and
-  # sets up the necessary configurations for the communicating with the server.
+  # Initializes a new instance of the ResuourceServer class and sets up the 
+  # necessary configurations for the communicating with the server.
   #
   # Params:
-  #   +auth_server_uri+::   Authorization server to use
-  #   +rsrc_server_uri+::   URI of protected resource server
-  #
-  # Attributes set:
-  #   +@uri+::              URI of the authorization server
-  #   +@connection+::       Connection object to be used for further communication
-  #   +@configuration+::    Hash of server capabilities and endpoints
+  #   +server_uri+::            URI of protected resource server
+  #   +authorization_server+::  Authorization server to use
 
-  def initialize(auth_server)
-    @auth_server = auth_server
+  def initialize(server_uri, authorization_server)
+    @server_uri = server_uri
+    @authorization_server = authorization_server
   end
 
   #-------------------------------------------------------------------------------
 
+  ##
+  # Retrieves the resource specified by the URI from the resource server.  If
+  # the request is unauthorized, the request is redirected to the authorization
+  # server.
+  #
+  # Params:
+  #   +uri+::                   URI of the requested resource
+  #
+  # Returns::
+  #   +response+::              Response from the server
+
   def get_resource(uri)
-    retries = 0
-    success = false
+    response = connection.get(@server_uri + uri) do |request|
+      access_token = @authorization_server.access_token
+      request.headers["Authorization"] = "Bearer #{access_token}" if access_token
 
-    while retries <= 1 && !success
-      response = resource_server.get(uri) do |request|
-        request.body = {
-          "access_token"  => @access_token
-        }
-      end
-
-      if response.status == 401
-        retries += 1
-        Rails.logger.debug "------ Received 401 from resource server ------"
-
-        @state = "#{Time.now.to_i}/#{SecureRandom.hex(18)}"      
-
-        # Redirect the user to the authorization server 
-        authorize_path = @auth_server.configuration["authorization_endpoint"] + "?" +
-                            "response_type=code&" +
-                            "client_id=#{PROVIDERS[:asva][:client_id]}&" + 
-                            "redirect_uri=http://localhost:3000/auth_endpoint_callback&" +
-                            "state=#{@state}"
-
-        Rails.logger.debug "------ Redirecting to: #{authorize_path} ------"
-
-        redirect_to authorize_path
-      elsif response.status == 200
-        success = true
-        response_data = JSON.parse(response.body)
-        @access_token = response_data[:access_token]
-      end
+      Rails.logger.debug "--------- request.headers = #{request.headers.inspect} ----------"
+      Rails.logger.debug "--------- request.body = #{request.body.inspect} ---------"
     end
 
-    byebug
-    response if success
+    Rails.logger.debug "--------- response.headers = #{response.headers.inspect} ----------"
+    Rails.logger.debug "--------- response.body = #{response.body} ----------"
+
+    response
+  end
+
+  #-------------------------------------------------------------------------------
+  private
+  #-------------------------------------------------------------------------------
+
+  ##
+  # Establish a connection object that will be reused during communication 
+  # with the authorization server.  The connection is cached in an instance
+  # variable.
+
+  def connection
+    @connection ||= Faraday.new(@server_uri, :ssl => {:verify => false}) do |builder|
+      builder.request   :url_encoded    # Encode request parameters as "www-form-urlencoded"
+      builder.response  :logger         # Log request and response to STDOUT
+      builder.adapter   :net_http       # Perform requests with Net::HTTP
+    end
   end
 
 end

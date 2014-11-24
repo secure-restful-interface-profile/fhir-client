@@ -45,8 +45,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">FhirClient</a>
+        <%= link_to "FhirClient", root_path, class: "navbar-brand" %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
+          <ul class="nav navbar-nav navbar">
+            <li><%= link_to "Organizations", organizations_path %></li>
+            <li><%= link_to "Identity Providers", identity_providers_path %></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user %>
               <li class="dropdown" >
@@ -59,7 +63,7 @@
                 </ul>
               </li>
             <% else %>
-              <li><%= link_to "Sign in", "/auth/idpp" %></li>
+              <li><%= link_to "Sign in", "/signin" %></li>
             <% end %>
           </ul>
         </div>

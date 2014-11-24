@@ -1,3 +1,58 @@
-body {
-	padding-top: 60px;
+a {
+  color: #08c;
+}
+
+a:visited {
+  color: #08c;
+}
+
+a:hover {
+  background-color: white;
+}
+
+a.btn:visited {
+  color: white;
+}
+
+a.btn-default:visited {
+  color: #333;
+}
+
+div.control-group {
+  margin-bottom: 20px;
+}
+
+ul.organizations {
+  list-style: none;
+  padding: 40px;
+}
+
+li.organization {
+  text-align: center;
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 20px;
+  float: left;
+  /*background-color: #79b;*/
+}
+
+li.organization p {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+/*li.organization a {
+  color: white;
+}*/
+
+td.logo {
+  text-align: center;
+}
+
+img.small {
+  height: 30px;
+}
+
+img.large {
+  height: 150px;
 }

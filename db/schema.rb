@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114185607) do
+ActiveRecord::Schema.define(version: 20141122173448) do
+
+  create_table "identity_providers", force: true do |t|
+    t.string   "name"
+    t.string   "uri"
+    t.string   "client_id"
+    t.string   "registration_client_uri"
+    t.text     "registration_access_token"
+    t.string   "logo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "organizations", force: true do |t|
+    t.string   "name"
+    t.string   "resource_server_uri"
+    t.string   "authorization_server_uri"
+    t.string   "client_id"
+    t.string   "registration_client_uri"
+    t.text     "registration_access_token"
+    t.string   "logo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "provider"

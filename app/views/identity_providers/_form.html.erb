@@ -1,0 +1,65 @@
+<%= form_for @identity_provider, :html => { :class => "form-horizontal identity_provider" } do |f| %>
+
+    <% if @identity_provider.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@identity_provider.errors.count, "error") %> prohibited this identity_provider from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @identity_provider.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@identity_provider[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :uri, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :uri, :class => 'form-control' %>
+    </div>
+    <%= error_span(@identity_provider[:uri]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label "Client ID", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :client_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@identity_provider[:client_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :registration_client_uri, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :registration_client_uri, :class => 'form-control' %>
+    </div>
+    <%= error_span(@identity_provider[:registration_client_uri]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :registration_access_token, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :registration_access_token, :class => 'form-control', :rows => 5 %>
+    </div>
+    <%= error_span(@identity_provider[:registration_access_token]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :logo, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :logo, :class => 'form-control' %>
+    </div>
+    <%= error_span(@identity_provider[:logo]) %>
+  </div>
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            identity_providers_path, :class => 'btn btn-default' %>
+
+<% end %>

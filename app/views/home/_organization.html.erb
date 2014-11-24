@@ -1,0 +1,7 @@
+<li class="organization">
+  <%= link_to image_tag(organization.logo, class: "large"), 
+                            organization_records_path(organization) %>
+  <p>
+    <%= link_to organization.name, organization_records_path(organization) %>
+  </p>
+</li>

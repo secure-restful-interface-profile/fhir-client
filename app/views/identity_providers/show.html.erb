@@ -1,0 +1,29 @@
+<%- model_class = IdentityProvider -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @identity_provider.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:uri) %>:</strong></dt>
+  <dd><%= @identity_provider.uri %></dd>
+  <dt><strong>Client ID:</strong></dt>
+  <dd><%= @identity_provider.client_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:registration_client_uri) %>:</strong></dt>
+  <dd><%= @identity_provider.registration_client_uri %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:registration_access_token) %>:</strong></dt>
+  <dd><%= @identity_provider.registration_access_token %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:logo) %>:</strong></dt>
+  <dd><%= @identity_provider.logo %></dd>
+</dl>
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              identity_providers_path, :class => 'btn btn-default'  %>
+<%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_identity_provider_path(@identity_provider), :class => 'btn btn-default' %>
+<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              identity_provider_path(@identity_provider),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>

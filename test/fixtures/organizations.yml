@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  resource_server: MyString
+  authorization_server: MyString
+  client_id: MyString
+  registration_client_uri: MyString
+  registration_access_token: MyText
+  logo: MyString
+
+two:
+  name: MyString
+  resource_server: MyString
+  authorization_server: MyString
+  client_id: MyString
+  registration_client_uri: MyString
+  registration_access_token: MyText
+  logo: MyString

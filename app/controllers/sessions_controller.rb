@@ -1,5 +1,5 @@
 ##
-# = Authentications Controller
+# = Sessions Controller
 #
 # <description>
 
@@ -12,6 +12,20 @@ class SessionsController < ActionController::Base
   # def index
   #   @authentications = current_user.authentications if current_user
   # end
+
+  #-------------------------------------------------------------------------------
+
+  ##
+  #
+
+  def new
+    @identity_providers = IdentityProviders.all
+    if @identity_providers.count > 1
+      render
+    else
+      redirect_to "/auth/#{@identity_providers.first.uri}"
+    end
+  end
 
   #-------------------------------------------------------------------------------
 

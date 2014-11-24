@@ -1,0 +1,42 @@
+<%- model_class = IdentityProvider -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:uri) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @identity_providers.each do |identity_provider| %>
+      <tr>
+        <td class="logo">
+          <%= link_to image_tag(identity_provider.logo, class: "small"),
+                            identity_provider.uri %>
+        </td>
+        <td><%= link_to identity_provider.name, identity_provider.uri %></td>
+        <td><%= link_to identity_provider.uri, identity_provider.uri %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_identity_provider_path(identity_provider), 
+                      :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      identity_provider_path(identity_provider),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', 
+                                    :default => t("helpers.links.confirm", 
+                                    :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_identity_provider_path,
+            :class => 'btn btn-primary' %>

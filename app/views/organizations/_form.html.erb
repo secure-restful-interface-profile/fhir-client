@@ -1,0 +1,73 @@
+<%= form_for @organization, :html => { :class => "form-horizontal organization" } do |f| %>
+
+    <% if @organization.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@organization.errors.count, "error") %> prohibited this organization from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @organization.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@organization[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :resource_server_uri, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :resource_server_uri, :class => 'form-control' %>
+    </div>
+    <%= error_span(@organization[:resource_server_uri]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :authorization_server_uri, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :authorization_server_uri, :class => 'form-control' %>
+    </div>
+    <%= error_span(@organization[:authorization_server_uri]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label "Client ID", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :client_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@organization[:client_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :registration_client_uri, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :registration_client_uri, :class => 'form-control' %>
+    </div>
+    <%= error_span(@organization[:registration_client_uri]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :registration_access_token, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :registration_access_token, :class => 'form-control', :rows => 5 %>
+    </div>
+    <%= error_span(@organization[:registration_access_token]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :logo, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :logo, :class => 'form-control' %>
+    </div>
+    <%= error_span(@organization[:logo]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            organizations_path, :class => 'btn btn-default' %>
+
+<% end %>
