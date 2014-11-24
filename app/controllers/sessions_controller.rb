@@ -3,7 +3,7 @@
 #
 # <description>
 
-class SessionsController < ActionController::Base
+class SessionsController < ApplicationController #ActionController::Base
 
   # layout "application"
 
@@ -19,12 +19,7 @@ class SessionsController < ActionController::Base
   #
 
   def new
-    @identity_providers = IdentityProviders.all
-    if @identity_providers.count > 1
-      render
-    else
-      redirect_to "/auth/#{@identity_providers.first.uri}"
-    end
+    @identity_providers = IdentityProvider.all
   end
 
   #-------------------------------------------------------------------------------
