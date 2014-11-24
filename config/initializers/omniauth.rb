@@ -25,5 +25,3 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     }
   }
 end
-
-AUTH_SERVER = AuthorizationServer.new("https://as-va.mitre.org", PROVIDERS[:asva][:client_id])
