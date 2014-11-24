@@ -64,7 +64,7 @@ class RecordsController < ApplicationController
     when UNAUTHORIZED
       unauthorized_request
     when OK
-      response
+      JSON.parse(response.body)
     else
       raise "Response error: #{response.inspect}"
     end
