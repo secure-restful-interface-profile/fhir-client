@@ -3,7 +3,7 @@
 <h4>Active Problems</h4>
 <% unless @conditions.empty? %>
   <ul class="conditions">
-  	<%= render :partial => "condition", @collection => @conditions %>
+  	<%= render :partial => "condition", :collection => @conditions %>
   </ul>
 <% else %>
   <p>No data</p>
