@@ -16,19 +16,27 @@
 
     <!-- For third-generation iPad with high-resolution Retina display: -->
     <!-- Size should be 144 x 144 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', 
+                              :rel => 'apple-touch-icon-precomposed', 
+                              :type => 'image/png', :sizes => '144x144' %>
 
     <!-- For iPhone with high-resolution Retina display: -->
     <!-- Size should be 114 x 114 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', 
+                              :rel => 'apple-touch-icon-precomposed', 
+                              :type => 'image/png', :sizes => '114x114' %>
 
     <!-- For first- and second-generation iPad: -->
     <!-- Size should be 72 x 72 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', 
+                              :rel => 'apple-touch-icon-precomposed', 
+                              :type => 'image/png', :sizes => '72x72' %>
 
     <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
     <!-- Size should be 57 x 57 pixels -->
-    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', 
+                              :rel => 'apple-touch-icon-precomposed', 
+                              :type => 'image/png' %>
 
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
@@ -38,24 +46,35 @@
   </head>
   <body>
 
-    <div class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" 
+                      data-target=".navbar-responsive-collapse">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to "FhirClient", root_path, class: "navbar-brand" %>
+        <%= link_to root_path, class: "navbar-brand", style: "width=200px;" do %>
+          <%= image_tag "logo.png", class: "brand" %>
+          <span class="brand-title">Health App</span>
+        <% end %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav navbar">
-            <li><%= link_to "Organizations", organizations_path %></li>
-            <li><%= link_to "Identity Providers", identity_providers_path %></li>
+            <li class="<%= is_active?(root_path) %>">
+              <%= link_to "Home", root_path %>
+            </li>
+            <li class="<%= is_active?(organizations_path) %>">
+              <%= link_to "Organizations", organizations_path %>
+            </li>
+            <li class="<%= is_active?(identity_providers_path) %>">
+              <%= link_to "Identity Providers", identity_providers_path %>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user %>
               <li class="dropdown" >
-                <%= link_to "#", :class => "dropdown-toggle", 'data-toggle' => "dropdown", :role => "button",
-                  'aria-expanded' => "false" do %>
+                <%= link_to "#", :class => "dropdown-toggle", 'data-toggle' => "dropdown", 
+                    :role => "button", 'aria-expanded' => "false" do %>
                   Signed in <span class="caret"></span>
                 <% end %>
                 <ul class="dropdown-menu" role="menu">
@@ -68,7 +87,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
 
     <div class="container">
       <div class="row">
@@ -78,6 +97,5 @@
         </div>
       </div><!--/row-->
     </div> <!-- /container -->
-
   </body>
 </html>

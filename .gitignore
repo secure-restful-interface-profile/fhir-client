@@ -23,3 +23,7 @@
 
 # Ignore provider configuration - this should be configured directly on the production machine.
 /config/providers.yml
+
+# Ignore local.css color and logo definitions
+/app/assets/stylesheets/local.css
+/app/assets/images/logo.png

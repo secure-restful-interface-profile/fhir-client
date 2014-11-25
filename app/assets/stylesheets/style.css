@@ -49,6 +49,13 @@ td.logo {
   text-align: center;
 }
 
+img.brand {
+  margin-top: -5px;
+  margin-right: 10px;
+  height: 30px;
+  float: left;
+}
+
 img.small {
   height: 30px;
 }
