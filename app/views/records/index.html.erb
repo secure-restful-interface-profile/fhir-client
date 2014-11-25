@@ -1,6 +1,6 @@
 <h1>Patient Record</h1>
 
-<h4>Active Problems</h4>
+<h4>Conditions</h4>
 <% unless @conditions.empty? %>
   <ul class="conditions">
   	<%= render :partial => "condition", :collection => @conditions %>
@@ -8,3 +8,31 @@
 <% else %>
   <p>No data</p>
 <% end %>
+
+<h4>Medications</h4>
+<% unless @medications.empty? %>
+  <ul class="conditions">
+    <%= render :partial => "medication", :collection => @medications %>
+  </ul>
+<% else %>
+  <p>No data</p>
+<% end %>
+
+<h4>Observations</h4>
+<% unless @observations.empty? %>
+  <ul class="conditions">
+    <%= render :partial => "observation", :collection => @observations %>
+  </ul>
+<% else %>
+  <p>No data</p>
+<% end %>
+
+<h4>Encounters</h4>
+<% unless @encounters.empty? %>
+  <ul class="conditions">
+    <%= render :partial => "encounter", :collection => @encounters %>
+  </ul>
+<% else %>
+  <p>No data</p>
+<% end %>
+
