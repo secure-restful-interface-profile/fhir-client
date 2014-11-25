@@ -27,14 +27,14 @@ class ResourceServer
   #
   # Params:
   #   +uri+::                   URI of the requested resource
+  #   +access_token+::          Access token from authorization server
   #
   # Returns::
   #   +response+::              Response from the server
 
-  def get_resource(uri)
+  def get_resource(uri, access_token)
     response = connection.get(@server_uri + uri) do |request|
-      access_token = @authorization_server.access_token
-      request.headers["Authorization"] = "Bearer #{access_token}" if access_token
+      request.headers["Authorization"] = "Bearer #{access_token}" unless access_token.blank?
 
       Rails.logger.debug "--------- request.headers = #{request.headers.inspect} ----------"
       Rails.logger.debug "--------- request.body = #{request.body.inspect} ---------"

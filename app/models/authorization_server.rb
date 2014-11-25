@@ -88,7 +88,7 @@ class AuthorizationServer
 
       if OK == response.status
         parsed_response = JSON.parse(response.body)
-        cache_write("access_token", parsed_response["access_token"])
+        parsed_response["access_token"]
       else
         raise "Call to get access token from authorization server failed. #{response.inspect}"
       end
@@ -122,8 +122,8 @@ class AuthorizationServer
   # Returns:
   #   +String+::            Access token
 
-  def access_token
-    cache_read("access_token")
+  def access_token(session)
+    session["access_token"]
   end
 
   #-------------------------------------------------------------------------------

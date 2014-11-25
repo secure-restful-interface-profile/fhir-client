@@ -16,10 +16,14 @@ class RecordsController < ApplicationController
 
     @organization = Organization.find(params[:organization_id])
 
-    @conditions     = get_resource("conditions")
-    #@medications    = get_resource("medications")
-    #@encounters     = get_resource("encounters")
-    #@observations   = get_resource("observations")
+    # Each of these calls can result in a redirection for authorization.
+    # Don't continue if we redirect - we'll get called again later after
+    # authorization is complete.
+
+    success = get_resource("conditions")
+    success &&= get_resource("medications")   if success
+    success &&= get_resource("encounters")    if success
+    success &&= get_resource("observations")  if success
   end
   
   #-------------------------------------------------------------------------------
@@ -40,7 +44,8 @@ class RecordsController < ApplicationController
 
     @organization = Organization.find(params[:org])
 
-    @organization.authorization_server.request_access_token(request, callback_url)
+    session["access_token"] = @organization.authorization_server.
+                                    request_access_token(request, callback_url)
     redirect_to organization_records_path(@organization)
   end
 
@@ -55,16 +60,23 @@ class RecordsController < ApplicationController
   # Params:
   #   +uri+::             URI for the resource on the resource server
   #
-  # Returns:
+  # Attributes:
   #   +response+::        Response containing resource information, if successful
+  #
+  # Returns:
+  #   +Boolean+::         true if request handled, false if redirected
   
-  def get_resource(uri)
-    response = @organization.resource_server.get_resource("/test-stub/api/#{uri}.json")
+  def get_resource(resource)
+    response = @organization.resource_server.get_resource(
+                                                "/test-stub/api/#{resource}.json",
+                                                session[:access_token])
     case response.status
     when UNAUTHORIZED
       unauthorized_request
+      false
     when OK
-      JSON.parse(response.body)
+      instance_variable_set("@#{resource}", JSON.parse(response.body))
+      true
     else
       raise "Response error: #{response.inspect}"
     end
