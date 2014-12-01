@@ -6,13 +6,16 @@ Rails.application.routes.draw do
     resources :records, only: :index
   end
 
+  # Omniauth paths
+  get '/auth/:provider',                  to: lambda{|env| [404, {}, ["Not Found"]]},   as: 'auth'  
   get '/auth/:provider/callback',         to: 'sessions#create'
   get '/auth/:provider/setup',            to: 'sessions#setup'
-  get '/jwk',                             to: 'jwk#jwk'
-  get 'auth_endpoint_callback',           to: 'records#auth_endpoint_callback',   as: 'auth_endpoint_callback'
 
-  get '/signin',                          to: 'sessions#new',                     as: 'signin'
-  delete '/signout',                      to: 'sessions#destroy',                 as: 'signout'
+  get '/jwk',                             to: 'jwk#jwk'
+  get 'auth_endpoint_callback',           to: 'records#auth_endpoint_callback',         as: 'auth_endpoint_callback'
+
+  get '/signin',                          to: 'sessions#new',                           as: 'signin'
+  delete '/signout',                      to: 'sessions#destroy',                       as: 'signout'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
