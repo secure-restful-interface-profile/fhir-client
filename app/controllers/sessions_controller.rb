@@ -54,13 +54,15 @@ class SessionsController < ApplicationController #ActionController::Base
   def setup
     Rails.logger.debug "========== Begin setup =========="
 
+    options = request.env['omniauth.strategy'].options
+
     # byebug
     Rails.logger.debug "------ private_key = #{Application.private_key} ------"
 
-    jws = jwt_token
+    jws = jwt_token(options)
     Rails.logger.debug "------ jws = #{jws} ------"
 
-    request.env['omniauth.strategy'].options[:client_options][:client_assertion] = jws
+    options[:client_options][:client_assertion] = jws
     Rails.logger.debug "------ omniauth.strategy = #{request.env['omniauth.strategy'].options.inspect} ------"
 
     render :text => "Omniauth setup phase.", :status => 200
@@ -97,12 +99,12 @@ class SessionsController < ApplicationController #ActionController::Base
   # Returns:
   #   ++::                  Signed JSON Web Token
 
-  def jwt_token
+  def jwt_token(options)
     # Sign our claims with our private key.  The authorization server will 
     # contact our jwks_uri endpoint to get our public key to decode the JWT.
 
     #JWT.encode(jwt_claims, Application.private_key, 'RS256')
-    JSON::JWT.new(jwt_claims).sign(Application.private_key, 'RS256')
+    JSON::JWT.new(jwt_claims(options)).sign(Application.private_key, 'RS256')
   end
 
   #-------------------------------------------------------------------------------
@@ -116,13 +118,13 @@ class SessionsController < ApplicationController #ActionController::Base
   # Returns:
   #   +Hash+::              Set of claims for JSON Web Token
 
-  def jwt_claims
+  def jwt_claims(options)
     now = Time.now.to_i
 
     {
       iss: Application.client_id,                   # Issuer (Client app)
       sub: Application.client_id,                   # Subject of request (Client app)
-      aud: "https://idp-p.mitre.org/token",         # Intended audience (Personal Identity Provider)
+      aud: options[:host],                          # Intended audience (Personal Identity Provider)
       iat: now,                                     # Time of issue
       exp: now + CLAIM_EXPIRATION,                  # Expiration time
       jti: "#{now}/#{SecureRandom.hex(18)}",        # Unique ID for request

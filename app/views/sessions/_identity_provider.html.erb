@@ -1,0 +1,7 @@
+<li class="organization">
+  <%= link_to image_tag(identity_provider.logo, class: "large"), 
+  							"/auth/#{identity_provider.nickname}" %>
+  <p>
+    <%= link_to identity_provider.name, "/auth/#{identity_provider.nickname}" %>
+  </p>
+</li>
