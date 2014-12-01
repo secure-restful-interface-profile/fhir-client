@@ -3,23 +3,22 @@
 #
 # <description>
 
-class SessionsController < ApplicationController #ActionController::Base
-
-  # layout "application"
-
-  #-------------------------------------------------------------------------------
-
-  # def index
-  #   @authentications = current_user.authentications if current_user
-  # end
-
-  #-------------------------------------------------------------------------------
+class SessionsController < ApplicationController
 
   ##
   #
 
   def new
     @identity_providers = IdentityProvider.all
+
+    if @identity_providers.size > 1
+      render
+    elsif @identity_providers.size > 0
+      redirect_to "/auth/#{@identity_providers.first.nickname}"
+    else
+      redirect_to root_path, 
+                  alert: "Sorry, but no trusted identity providers have been added."
+    end
   end
 
   #-------------------------------------------------------------------------------
