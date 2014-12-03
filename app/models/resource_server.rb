@@ -33,7 +33,7 @@ class ResourceServer
   #   +response+::              Response from the server
 
   def get_resource(uri, access_token)
-    response = connection.get(@server_uri + uri) do |request|
+    response = connection.get(@server_uri + "/" + uri) do |request|
       request.headers["Authorization"] = "Bearer #{access_token}" unless access_token.blank?
 
       Rails.logger.debug "--------- request.headers = #{request.headers.inspect} ----------"

@@ -20,10 +20,10 @@ class RecordsController < ApplicationController
     # Don't continue if we redirect - we'll get called again later after
     # authorization is complete.
 
-    success = get_resource("conditions")
-    success &&= get_resource("medications")   if success
-    success &&= get_resource("encounters")    if success
-    success &&= get_resource("observations")  if success
+    success = get_resource("condition")
+    success &&= get_resource("medication")   if success
+    success &&= get_resource("encounter")    if success
+    success &&= get_resource("observation")  if success
   end
   
   #-------------------------------------------------------------------------------
@@ -67,8 +67,7 @@ class RecordsController < ApplicationController
   #   +Boolean+::         true if request handled, false if redirected
   
   def get_resource(resource)
-    response = @organization.resource_server.get_resource(
-                                                "/test-stub/api/#{resource}.json",
+    response = @organization.resource_server.get_resource(resource,
                                                 session[:access_token])
     case response.status
     when UNAUTHORIZED
