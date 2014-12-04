@@ -2,29 +2,36 @@
 
 <h4>Conditions</h4>
 <% unless @conditions.empty? %>
-  <%= @conditions.inspect %>
+  <table class="table table-condensed table-striped conditions">
+  	<%= render :partial => "condition", :collection => @conditions %>
+  </table>
 <% else %>
   <p>No data</p>
 <% end %>
 
 <h4>Medications</h4>
 <% unless @medications.empty? %>
-  <%= @medications.inspect %>
+  <table class="table table-condensed table-striped medications">
+    <%= render :partial => "medication", :collection => @medications %>
+  </table>
 <% else %>
   <p>No data</p>
 <% end %>
 
 <h4>Observations</h4>
 <% unless @observations.empty? %>
-  <%= @observations.inspect %>
+  <table class="table table-condensed table-striped observations">
+    <%= render :partial => "observation", :collection => @observations %>
+  </table>
 <% else %>
   <p>No data</p>
 <% end %>
 
 <h4>Encounters</h4>
 <% unless @encounters.empty? %>
-  <%= @encounters.inspect %>
+  <table class="table table-condensed table-striped encounters">
+    <%= render :partial => "encounter", :collection => @encounters %>
+  </table>
 <% else %>
   <p>No data</p>
 <% end %>
-

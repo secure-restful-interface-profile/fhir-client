@@ -1,0 +1,30 @@
+<h1>Patient Record</h1>
+
+<h4>Conditions</h4>
+<% unless @conditions.empty? %>
+  <%= @conditions.inspect %>
+<% else %>
+  <p>No data</p>
+<% end %>
+
+<h4>Medications</h4>
+<% unless @medications.empty? %>
+  <%= @medications.inspect %>
+<% else %>
+  <p>No data</p>
+<% end %>
+
+<h4>Observations</h4>
+<% unless @observations.empty? %>
+  <%= @observations.inspect %>
+<% else %>
+  <p>No data</p>
+<% end %>
+
+<h4>Encounters</h4>
+<% unless @encounters.empty? %>
+  <%= @encounters.inspect %>
+<% else %>
+  <p>No data</p>
+<% end %>
+
