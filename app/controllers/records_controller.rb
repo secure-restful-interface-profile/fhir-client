@@ -74,7 +74,9 @@ class RecordsController < ApplicationController
       unauthorized_request
       false
     when OK
-      instance_variable_set("@#{resource.pluralize}", JSON.parse(response.body))
+      fhir = JSON.parse(response.body)
+      Rails.logger.debug "----- FHIR response = #{fhir} -----"
+      instance_variable_set("@#{resource.pluralize}", fhir)
       true
     else
       raise "Response error: #{response.inspect}"
