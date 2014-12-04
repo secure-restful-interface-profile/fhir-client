@@ -74,7 +74,7 @@ class RecordsController < ApplicationController
       unauthorized_request
       false
     when OK
-      instance_variable_set("@#{resource}", JSON.parse(response.body))
+      instance_variable_set("@#{resource.pluralize}", JSON.parse(response.body))
       true
     else
       raise "Response error: #{response.inspect}"
