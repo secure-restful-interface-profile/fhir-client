@@ -69,6 +69,8 @@ class RecordsController < ApplicationController
   def get_resource(resource)
     response = @organization.resource_server.get_resource(resource,
                                                 session[:access_token])
+    Rails.logger.debug "----- response.status = #{response.status} -----"
+    
     case response.status
     when UNAUTHORIZED
       unauthorized_request
