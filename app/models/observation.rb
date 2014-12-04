@@ -6,7 +6,7 @@ class Observation
     fhir["entry"].map do |resource|
       observation = Hash.new
 
-      observation["date"]   = Date.parse(resource["content"]["appliesDateTime"]).to_datetime
+      observation["date"]   = Date.parse(resource["content"]["appliesDateTime"])
       observation["value"]  = resource["content"]["component"].map do |component|
         component["valueQuantity"]["value"].to_i
       end
