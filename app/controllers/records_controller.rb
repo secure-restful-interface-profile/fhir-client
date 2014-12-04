@@ -70,7 +70,7 @@ class RecordsController < ApplicationController
     response = @organization.resource_server.get_resource(resource,
                                                 session[:access_token])
     Rails.logger.debug "----- response.status = #{response.status} -----"
-    
+
     case response.status
     when UNAUTHORIZED
       unauthorized_request
@@ -78,7 +78,8 @@ class RecordsController < ApplicationController
     when OK
       fhir = JSON.parse(response.body)
       Rails.logger.debug "----- FHIR response = #{fhir} -----"
-      instance_variable_set("@#{resource.pluralize}", fhir)
+      instance_variable_set("@#{resource.pluralize}", 
+                                klass(resource).parse_from_fhir(fhir))
       true
     else
       raise "Response error: #{response.inspect}"
@@ -116,6 +117,12 @@ class RecordsController < ApplicationController
 
   def callback_url
     auth_endpoint_callback_url(org: @organization.id)
+  end
+
+  #-------------------------------------------------------------------------------
+
+  def klass(model_name)
+    Object.const_get(model_name.classify)
   end
 
 end
