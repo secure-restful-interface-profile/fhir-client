@@ -39,7 +39,8 @@ class SessionsController < ApplicationController
     #user = user_from_omniauth(omniauth)
     #session[:user_id] = user.id
     #session[:user_id]   = omniauth['uid']
-    session[:email]     = omniauth['email']
+    session[:email]     = omniauth['info']['email']
+    Rails.logger.debug "------ email = #{omniauth['info']['email']} ------"
 
     Rails.logger.debug "========== End callback redirection from identity provider =========="
 
