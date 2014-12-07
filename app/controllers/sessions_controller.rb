@@ -38,7 +38,8 @@ class SessionsController < ApplicationController
 
     #user = user_from_omniauth(omniauth)
     #session[:user_id] = user.id
-    session[:user_id] = omniauth['uid']
+    #session[:user_id]   = omniauth['uid']
+    session[:email]     = omniauth['email']
 
     Rails.logger.debug "========== End callback redirection from identity provider =========="
 
@@ -72,7 +73,9 @@ class SessionsController < ApplicationController
   #-------------------------------------------------------------------------------
 
   def destroy
-    session[:user_id] = nil
+    #session[:user_id]   = nil
+    session[:email]     = nil
+
     redirect_to root_url, notice: "Signed out!"
   end
 
