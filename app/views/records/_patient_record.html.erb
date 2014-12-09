@@ -1,14 +1,11 @@
 <% patient = @patients.first %>
 <h1><%= [ patient["family_name"], patient["given_name"] ].join(', ') %></h1>
-
-<h4>Basic Info</h4>
-
 <p>
   Birth date: <%= patient["birth_date"] %>
 </p>
 
 <h4>Conditions</h4>
-<% unless @conditions.empty? %>
+<% unless @conditions.nil? || @conditions.empty? %>
   <table class="table table-condensed table-striped conditions">
     <tr>
       <th>Condition</th>
@@ -22,7 +19,7 @@
 <% end %>
 
 <h4>Medications</h4>
-<% unless @medications.empty? %>
+<% unless @medications.nil? || @medications.empty? %>
   <table class="table table-condensed table-striped medications">
     <tr>
       <th>Type</th>
@@ -34,7 +31,7 @@
 <% end %>
 
 <h4>Observations</h4>
-<% unless @observations.empty? %>
+<% unless @observations.nil? || @observations.empty? %>
   <table class="table table-condensed table-striped observations">
     <tr>
       <th>Type</th>
@@ -47,7 +44,7 @@
 <% end %>
 
 <h4>Encounters</h4>
-<% unless @encounters.empty? %>
+<% unless @encounters.nil? || @encounters.empty? %>
   <table class="table table-condensed table-striped encounters">
     <tr>
       <th>Type</th>
