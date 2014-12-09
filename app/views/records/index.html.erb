@@ -1,4 +1,4 @@
-<% @patients.size > 1 %>
+<% if @patients.size > 1 %>
   <%= render :partial => "patient_list" %>
 <% else %>
   <%= render :partial => "patient_record" %>
