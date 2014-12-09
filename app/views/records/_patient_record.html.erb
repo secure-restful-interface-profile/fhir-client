@@ -1,8 +1,10 @@
 <% patient = @patients.first %>
-<h1><%= [ patient["family_name"], patient["given_name"] ].join(', ') %></h1>
-<p>
-  Birth date: <%= patient["birth_date"] %>
-</p>
+<% unless.patient.nil? %>
+  <h1><%= [ patient["family_name"], patient["given_name"] ].join(', ') %></h1>
+  <p>
+    Birth date: <%= patient["birth_date"] %>
+  </p>
+<% end %>
 
 <h4>Conditions</h4>
 <% unless @conditions.nil? || @conditions.empty? %>
