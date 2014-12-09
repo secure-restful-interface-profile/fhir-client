@@ -14,7 +14,7 @@ class Patient
 
       patient["familyName"]   = resource["content"]["name"].first["family"]
       patient["givenName"]    = resource["content"]["name"].first["given"]
-      patient["birthDate"]    = Date.parse(resource["content"]["birthDate"]
+      patient["birthDate"]    = Date.parse(resource["content"]["birthDate"])
       patient["id"]           = resource["entry"]["id"]
 
       patients << patient
