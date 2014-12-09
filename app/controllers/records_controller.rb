@@ -5,7 +5,7 @@
 
 class RecordsController < ApplicationController
 
-  before_filter   :find_organization
+  before_filter   :find_organization, :except => [ :auth_endpoint_callback ]
 
   #-------------------------------------------------------------------------------
 
