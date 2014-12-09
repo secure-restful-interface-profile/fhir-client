@@ -11,6 +11,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   #-------------------------------------------------------------------------------
+
+  ##
+  # General exception handling...
+
+  rescue_from StandardError do |exception|
+    Rails.logger.error { "#{exception.message} #{exception.backtrace.join("\n")}" }
+
+    redirect_to root_url, :alert => exception.message
+  end
+
+  #-------------------------------------------------------------------------------
   private
   #-------------------------------------------------------------------------------
 

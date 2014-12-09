@@ -26,3 +26,14 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     }
   end
 end
+
+# Setup OmniAuth error handling
+OmniAuth.config do |config|
+  config.on_failure do
+    message = env['omniauth.error.type']
+    Rails.logger.error { "/////// OmniAuth Failure: #{message} ///////" }
+
+    redirect_to root_path(:alert => message)
+  end
+end
+

@@ -5,27 +5,59 @@
 
 class RecordsController < ApplicationController
 
+  before_filter   :find_organization
+
+  #-------------------------------------------------------------------------------
+
   ##
   # GET /organizations/1/records
   # GET /organizations/1/records.json
   #
-  # Retrieves the patient record from the resource server.
+  # Retrieves patient records from the resource server.  The patient may be
+  # implicit depending on the requester.
   
   def index
     Rails.logger.debug "======== Enter RecordsController::index ========"
-
-    @organization = Organization.find(params[:organization_id])
 
     # Each of these calls can result in a redirection for authorization.
     # Don't continue if we redirect - we'll get called again later after
     # authorization is complete.
 
-    success = get_resource("condition")
-    success &&= get_resource("medication")   if success
-    success &&= get_resource("encounter")    if success
-    success &&= get_resource("observation")  if success
+    success = get_resource("patient")
+    if success && (@patients.size == 1)
+      # Get the rest of the patient information
+      success = get_resource("condition")
+      success &&= get_resource("medication")    if success
+      success &&= get_resource("encounter")     if success
+      success &&= get_resource("observation")   if success
+    end
   end
   
+  #-------------------------------------------------------------------------------
+
+  ##
+  # GET /organizations/1/records/1
+  # GET /organizations/1/records/1.json
+  #
+  # Retrieves a patient record from the resource server.
+  
+  def show
+    Rails.logger.debug "======== Enter RecordsController::show ========"
+
+    # Each of these calls can result in a redirection for authorization.
+    # Don't continue if we redirect - we'll get called again later after
+    # authorization is complete.
+
+    query = "?patient=" + params[:id]
+
+    success = get_resource("patient/@" + params[:id])
+
+    success &&= get_resource("condition" + query)     if success
+    success &&= get_resource("medication" + query)    if success
+    success &&= get_resource("encounter" + query)     if success
+    success &&= get_resource("observation" + query)   if success
+  end
+
   #-------------------------------------------------------------------------------
 
   ##
@@ -51,6 +83,17 @@ class RecordsController < ApplicationController
 
   #-------------------------------------------------------------------------------
   private
+  #-------------------------------------------------------------------------------
+
+  ##
+  # Looks up the organization for the requested record and sets the instance
+  # variable for the remainder of the request handling.  This is used as a 
+  # before filter.
+
+  def find_organization
+    @organization = Organization.find(params[:organization_id])
+  end
+
   #-------------------------------------------------------------------------------
 
   ##
