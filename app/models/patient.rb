@@ -12,6 +12,9 @@ class Patient
     fhir["entry"].map do |resource|
       patient = Hash.new
 
+      Rails.logger.debug "--------- resource['content'] = #{resource["content"]} ----------"
+      Rails.logger.debug "--------- resource['entry'] = #{resource["entry"]} ----------"
+      
       patient["familyName"]   = resource["content"]["name"].first["family"]
       patient["givenName"]    = resource["content"]["name"].first["given"]
       patient["birthDate"]    = Date.parse(resource["content"]["birthDate"])
