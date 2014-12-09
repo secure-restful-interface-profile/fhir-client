@@ -1,9 +1,10 @@
-<h1><%= @patients.first.name %></h1>
+<% patient = @patients.first %>
+<h1><%= [ patient["family_name"], patient["given_name"] ].join(', ') %></h1>
 
 <h4>Basic Info</h4>
 
 <p>
-  Birth date: <%= @patients.first["birthDate"] %>
+  Birth date: <%= patient["birth_date"] %>
 </p>
 
 <h4>Conditions</h4>
