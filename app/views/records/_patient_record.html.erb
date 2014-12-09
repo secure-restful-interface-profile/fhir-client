@@ -1,4 +1,10 @@
-<h1>Patient Record</h1>
+<h1><%= @patient.name %></h1>
+
+<h4>Basic Info</h4>
+
+<p>
+  Birth date: <%= @patient["birthDate"] %>
+</p>
 
 <h4>Conditions</h4>
 <% unless @conditions.empty? %>
