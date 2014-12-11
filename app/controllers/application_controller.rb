@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery with: :exception
 
+  before_filter   :authenticate_user
+
   #-------------------------------------------------------------------------------
 
   ##
@@ -23,6 +25,13 @@ class ApplicationController < ActionController::Base
 
   #-------------------------------------------------------------------------------
   private
+  #-------------------------------------------------------------------------------
+
+  def authenticate_user
+    redirect_to signin_path unless current_user
+    false
+  end
+
   #-------------------------------------------------------------------------------
 
   ##

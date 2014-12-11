@@ -5,16 +5,18 @@
 
 class SessionsController < ApplicationController
 
+  skip_before_filter   :authenticate_user, :only => [ :new, :create ]
+  
+  #-------------------------------------------------------------------------------
+
   ##
   #
 
   def new
     @identity_providers = IdentityProvider.all
 
-    if @identity_providers.size > 1
+    if @identity_providers.size > 0
       render
-    elsif @identity_providers.size > 0
-      redirect_to "/auth/#{@identity_providers.first.nickname}"
     else
       redirect_to root_path, 
                   alert: "Sorry, but no trusted identity providers have been added."
