@@ -14,22 +14,29 @@ class RecordsController < ApplicationController
   # GET /organizations/1/records.json
   #
   # Retrieves patient records from the resource server.  The patient may be
-  # implicit depending on the requester.
+  # implicit depending on authorization of the requester.  If so, only the records 
+  # for that patient are retrieved.
   
   def index
     Rails.logger.debug "======== Enter RecordsController::index ========"
 
-    # Each of these calls can result in a redirection for authorization.
-    # Don't continue if we redirect - we'll get called again later after
-    # authorization is complete.
+    # Each of these calls to get resources can result in a redirection for 
+    # authorization.  Don't continue if we redirect - we'll get called again 
+    # later after authorization is complete.
 
     success = get_resource("patient")
     if success && (@patients.size == 1)
+      Rails.logger.debug "  ------ @patients.size = #{@patients.size} ------"
       # Get the rest of the patient information
       success = get_resource("condition")
       success &&= get_resource("medication")    if success
       success &&= get_resource("encounter")     if success
       success &&= get_resource("observation")   if success
+
+      Rails.logger.debug "  ------ @conditions = #{@conditions.inspect} ------"
+      Rails.logger.debug "  ------ @medications = #{@medications.inspect} ------"
+      Rails.logger.debug "  ------ @encounters = #{@encounters.inspect} ------"
+      Rails.logger.debug "  ------ @observations = #{@observations.inspect} ------"
     end
   end
   
@@ -39,14 +46,14 @@ class RecordsController < ApplicationController
   # GET /organizations/1/records/1
   # GET /organizations/1/records/1.json
   #
-  # Retrieves a patient record from the resource server.
+  # Retrieves the patient record specified by ID from the resource server.
   
   def show
     Rails.logger.debug "======== Enter RecordsController::show ========"
 
-    # Each of these calls can result in a redirection for authorization.
-    # Don't continue if we redirect - we'll get called again later after
-    # authorization is complete.
+    # Each of these calls to get resources can result in a redirection for 
+    # authorization.  Don't continue if we redirect - we'll get called again 
+    # later after authorization is complete.
 
     query = "?patient=" + params[:id]
 
