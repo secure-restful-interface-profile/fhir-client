@@ -59,17 +59,16 @@
           <span class="brand-title">Health App</span>
         <% end %>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav navbar">
-            <li class="<%= is_active?(root_path) %>">
-              <%= link_to "Home", root_path %>
-            </li>
-            <li class="<%= is_active?(organizations_path) %>">
-              <%= link_to "Organizations", organizations_path %>
-            </li>
-            <li class="<%= is_active?(identity_providers_path) %>">
-              <%= link_to "Identity Providers", identity_providers_path %>
-            </li>
-          </ul>
+          <% if is_admin? %>
+            <ul class="nav navbar-nav navbar">
+              <li class="<%= is_active?(organizations_path) %>">
+                <%= link_to "Organizations", organizations_path %>
+              </li>
+              <li class="<%= is_active?(identity_providers_path) %>">
+                <%= link_to "Identity Providers", identity_providers_path %>
+              </li>
+            </ul>
+          <% end %>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user %>
               <li class="dropdown" >
