@@ -1,5 +1,7 @@
 <h1>Your patients</h1>
 
 <ul class="patients">
-  <li class="patient"><%= patient.name %></li>
+  <% @patients.each do |patient| %>
+    <li class="patient"><%= patient.name %></li>
+  <% end %>
 </ul>

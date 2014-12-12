@@ -29,22 +29,21 @@ class RecordsController < ApplicationController
     success = get_resource("patient")
 
     Rails.logger.debug "  ------ success = #{success} ------"
-    # Rails.logger.debug "  ------ @patients.size = #{@patients.size} ------"
     Rails.logger.debug "  ------ @patients = #{@patients.inspect} ------"
 
-    # if success && (@patients.size == 1)
-    #   Rails.logger.debug "  ------ @patients.size = #{@patients.size} ------"
-    #   # Get the rest of the patient information
-    #   success = get_resource("condition")
-    #   success &&= get_resource("medication")    if success
-    #   success &&= get_resource("encounter")     if success
-    #   success &&= get_resource("observation")   if success
+    if success && (@patients.size == 1)
+      Rails.logger.debug "  ------ @patients.size = #{@patients.size} ------"
+      # Get the rest of the patient information
+      success = get_resource("condition")
+      success &&= get_resource("medication")    if success
+      success &&= get_resource("encounter")     if success
+      success &&= get_resource("observation")   if success
 
-    #   Rails.logger.debug "  ------ @conditions = #{@conditions.inspect} ------"
-    #   Rails.logger.debug "  ------ @medications = #{@medications.inspect} ------"
-    #   Rails.logger.debug "  ------ @encounters = #{@encounters.inspect} ------"
-    #   Rails.logger.debug "  ------ @observations = #{@observations.inspect} ------"
-    # end
+      Rails.logger.debug "  ------ @conditions = #{@conditions.inspect} ------"
+      Rails.logger.debug "  ------ @medications = #{@medications.inspect} ------"
+      Rails.logger.debug "  ------ @encounters = #{@encounters.inspect} ------"
+      Rails.logger.debug "  ------ @observations = #{@observations.inspect} ------"
+    end
   end
   
   #-------------------------------------------------------------------------------
