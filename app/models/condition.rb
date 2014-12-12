@@ -1,4 +1,19 @@
+##
+# = Condition model
+#
+# This class provides condition-specific logic, particularly for parsing
+# conditions from FHIR-formatted data.
+
 class Condition
+
+  ##
+  # Parses a list of conditions from FHIR-formatted data
+  #
+  # Params:
+  #   +fhir+::          FHIR-formatted data
+  #
+  # Returns:
+  #   +Array+::         Array of conditions parsed from FHIR data
 
   def self.parse_from_fhir(fhir)
     conditions = []

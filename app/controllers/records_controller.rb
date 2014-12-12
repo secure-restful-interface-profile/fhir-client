@@ -1,11 +1,12 @@
 ##
 # = Records Controller
 #
-# <description>
+# The class retrieves the patient records from the specified organization.  It
+# also responds to callbacks from the authorization server.
 
 class RecordsController < ApplicationController
 
-  before_filter   :find_organization, :except => [ :auth_endpoint_callback ]
+  before_action   :find_organization, :except => [ :auth_endpoint_callback ]
 
   #-------------------------------------------------------------------------------
 
@@ -25,7 +26,7 @@ class RecordsController < ApplicationController
     # later after authorization is complete.
 
     success = get_resource("patient")
-    
+
     Rails.logger.debug "  ------ success = #{success} ------"
     Rails.logger.debug "  ------ @patients.size = #{@patients.size} ------"
     Rails.logger.debug "  ------ @patients = #{@patients.inspect} ------"

@@ -1,7 +1,7 @@
 ##
 # = Home Controller
 #
-# <description>
+# The class manages the home page for the application.
 
 class HomeController < ApplicationController
 

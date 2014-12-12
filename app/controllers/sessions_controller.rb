@@ -1,16 +1,20 @@
 ##
 # = Sessions Controller
 #
-# <description>
+# This class manages user sign-in and sign-out using a chosen identity provider.
+# It works in conjunction with the OmniAuth, OmniAuth OpenID Connect, and 
+# Rack-OAuth2 gems to perform the authentication.
 
 class SessionsController < ApplicationController
 
-  skip_before_filter   :authenticate_user, :only => [ :new, :create ]
-  
+  skip_before_filter   :require_signin, :only => [ :new, :create ]
+
   #-------------------------------------------------------------------------------
 
   ##
+  # GET /signin
   #
+  # Provides the list of identity providers to choose from to signin.
 
   def new
     @identity_providers = IdentityProvider.all
@@ -19,28 +23,29 @@ class SessionsController < ApplicationController
       render
     else
       redirect_to root_path, 
-                  alert: "Sorry, but no trusted identity providers have been added."
+                  alert: "Sorry, but no trusted identity providers are available."
     end
   end
 
   #-------------------------------------------------------------------------------
 
   ##
+  # GET /auth/:provider/callback
   #
+  # Acts as the callback routine from the identity provider and creates and 
+  # initializes the session for signin.  Information about the user is provided
+  # as part of the callback request, which we store in the session variable.
 
   def create
     Rails.logger.debug "========== Begin callback redirection from identity provider =========="
 
-    %w(auth origin params strategy).each do |x|
-      Rails.logger.debug "------ #{x}, #{request.env["omniauth.#{x}"].inspect} ------"
+    %w(auth origin params strategy).each do |attribute|
+      Rails.logger.debug "------ #{attribute}, #{request.env["omniauth.#{attribute}"].inspect} ------"
     end
 
     omniauth = request.env['omniauth.auth']
     Rails.logger.debug "------ omniauth = #{omniauth.inspect} ------"
 
-    #user = user_from_omniauth(omniauth)
-    #session[:user_id] = user.id
-    #session[:user_id]   = omniauth['uid']
     session[:email]     = omniauth['info']['email']
     Rails.logger.debug "------ email = #{omniauth['info']['email']} ------"
 
@@ -52,14 +57,13 @@ class SessionsController < ApplicationController
   #-------------------------------------------------------------------------------
 
   ##
-  #
+  # GET /auth/:provider/setup
   
   def setup
     Rails.logger.debug "========== Begin setup =========="
 
     options = request.env['omniauth.strategy'].options
 
-    # byebug
     Rails.logger.debug "------ private_key = #{Application.private_key} ------"
 
     jws = jwt_token(options)
@@ -75,23 +79,16 @@ class SessionsController < ApplicationController
 
   #-------------------------------------------------------------------------------
 
+  ##
+  # DELETE /signout
+  #
+  # Clears out the session information, effectively signing the user out.
+
   def destroy
-    #session[:user_id]   = nil
     session[:email]     = nil
 
     redirect_to root_url, notice: "Signed out!"
   end
-
-  #-------------------------------------------------------------------------------
-  protected
-  #-------------------------------------------------------------------------------
-
-  # This is necessary since Rails 3.0.4
-  # See https://github.com/intridea/omniauth/issues/185
-  # and http://www.arailsdemo.com/posts/44
-  # def handle_unverified_request
-  #   true
-  # end
 
   #-------------------------------------------------------------------------------
   private
@@ -101,14 +98,16 @@ class SessionsController < ApplicationController
   # This method creates a JSON Web Token (JWT) so that we can authenticate with
   # the authorization server.
   #
+  # Params:
+  #   +options+::           Claim options for web token (e.g. intended audience)
+  #
   # Returns:
-  #   ++::                  Signed JSON Web Token
+  #   +JSON::JWT+::         Signed JSON Web Token
 
   def jwt_token(options)
     # Sign our claims with our private key.  The authorization server will 
     # contact our jwks_uri endpoint to get our public key to decode the JWT.
 
-    #JWT.encode(jwt_claims, Application.private_key, 'RS256')
     JSON::JWT.new(jwt_claims(options)).sign(Application.private_key, 'RS256')
   end
 
@@ -119,6 +118,9 @@ class SessionsController < ApplicationController
   ##
   # This method defines the claims for the JSON Web Token (JWT) we use to
   # authenticate with the authorization server.
+  #
+  # Params:
+  #   +options+::           Claim options for web token (e.g. intended audience)
   #
   # Returns:
   #   +Hash+::              Set of claims for JSON Web Token
@@ -132,27 +134,8 @@ class SessionsController < ApplicationController
       aud: options[:host],                          # Intended audience (Personal Identity Provider)
       iat: now,                                     # Time of issue
       exp: now + CLAIM_EXPIRATION,                  # Expiration time
-      jti: "#{now}/#{SecureRandom.hex(18)}",        # Unique ID for request
+      jti: "#{now}/#{SecureRandom.hex(18)}"         # Unique ID for request
     }
   end
 
-  #-------------------------------------------------------------------------------
- 
-  # def user_from_omniauth(auth)
-  #   Rails.logger.debug "--- auth.slice(...) = #{auth.slice("provider", "uid")} ---"
-  #   User.where(auth.slice("provider", "uid")).first #  || create_from_omniauth(auth)
-  # end
-
-  #-------------------------------------------------------------------------------
- 
-  # def create_from_omniauth(auth)
-  #   raw_parameters = {
-  #     :provider => auth["provider"],
-  #     :uid => auth["uid"],
-  #     :name => auth["info"]["nickname"]
-  #   }
-  #   parameters = ActionController::Parameters.new(raw_parameters)
-  #   User.create!(parameters.permit(:provider, :uid, :name))
-  # end
-  
 end

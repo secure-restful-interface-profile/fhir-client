@@ -1,17 +1,20 @@
 ##
 # = Identity Providers Controller
 #
-# <description>
+# The class allows administrators to manage the list of approved identity
+# providers that can use be used to access patient records.
 
 class IdentityProvidersController < ApplicationController
 
-  before_action :set_identity_provider, only: [:show, :edit, :update, :destroy]
+  before_action   :set_identity_provider, only: [:show, :edit, :update, :destroy]
 
   #-------------------------------------------------------------------------------
 
   ##
   # GET /identity_providers
   # GET /identity_providers.json
+  #
+  # Retrieves a list of the approved identity providers.
 
   def index
     @identity_providers = IdentityProvider.all
@@ -22,6 +25,9 @@ class IdentityProvidersController < ApplicationController
   ##
   # GET /identity_providers/1
   # GET /identity_providers/1.json
+  #
+  # Retrieves the specified identity provider record from the database (actually 
+  # done by the before action routine).
 
   def show
   end
@@ -30,6 +36,8 @@ class IdentityProvidersController < ApplicationController
 
   ##
   # GET /identity_providers/new
+  #
+  # Builds a new identity provider instance in memory and renders HTML form.
 
   def new
     @identity_provider = IdentityProvider.new
@@ -39,6 +47,9 @@ class IdentityProvidersController < ApplicationController
 
   ##
   # GET /identity_providers/1/edit
+  #
+  # Retrieves the specified identity provider record from the database (actually 
+  # done by the before action routine) and renders HTML form.
 
   def edit
   end
@@ -48,6 +59,8 @@ class IdentityProvidersController < ApplicationController
   ##
   # POST /identity_providers
   # POST /identity_providers.json
+  #
+  # Creates a new approved identity provider in the database.
 
   def create
     @identity_provider = IdentityProvider.new(identity_provider_params)
@@ -68,6 +81,9 @@ class IdentityProvidersController < ApplicationController
   ##
   # PATCH/PUT /identity_providers/1
   # PATCH/PUT /identity_providers/1.json
+  #
+  # Updates the attributes of an existing approved identity provider in the 
+  # database.
 
   def update
     respond_to do |format|
@@ -86,6 +102,8 @@ class IdentityProvidersController < ApplicationController
   ##
   # DELETE /identity_providers/1
   # DELETE /identity_providers/1.json
+  #
+  # Removes an identity provider from the database.
 
   def destroy
     @identity_provider.destroy
@@ -100,7 +118,8 @@ class IdentityProvidersController < ApplicationController
   #-------------------------------------------------------------------------------
 
   ##
-  # Use callbacks to share common setup or constraints between actions.
+  # Finds the specified identity provider in the database and sets the instance
+  # variable for use later in the request.
 
   def set_identity_provider
     @identity_provider = IdentityProvider.find(params[:id])

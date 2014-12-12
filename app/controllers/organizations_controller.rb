@@ -1,17 +1,21 @@
 ##
 # = Organizations Controller
 #
-# <description>
+# The class allows administrators to manage the list of organizations that can
+# be accessed by this application.
 
 class OrganizationsController < ApplicationController
 
-  before_action :set_organization, only: [:show, :edit, :update, :destroy]
+  before_action   :require_admin
+  before_action   :set_organization, only: [:show, :edit, :update, :destroy]
 
   #-------------------------------------------------------------------------------
 
   ##
   # GET /organizations
   # GET /organizations.json
+  #
+  # Retrieves a list of organizations whose records we can access.
 
   def index
     @organizations = Organization.all
@@ -22,6 +26,9 @@ class OrganizationsController < ApplicationController
   ##
   # GET /organizations/1
   # GET /organizations/1.json
+  #
+  # Retrieves the specified organization record from the database (actually done
+  # by the before action routine).
 
   def show
   end
@@ -30,6 +37,8 @@ class OrganizationsController < ApplicationController
 
   ##
   # GET /organizations/new
+  # 
+  # Builds a new organization instance in memory and renders HTML form.
 
   def new
     @organization = Organization.new
@@ -38,6 +47,9 @@ class OrganizationsController < ApplicationController
   #-------------------------------------------------------------------------------
 
   # GET /organizations/1/edit
+  #
+  # Retrieves the specified organization record from the database (actually 
+  # done by the before action routine) and renders HTML form.
 
   def edit
   end
