@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!--
+
+  Fivefish RDoc Generator
+  $Id$
+
+  Authors:
+  - Michael Granger <ged@FaerieMUD.org>
+
+ -->
+<html lang="en">
+<head>
+	<title>RDoc Documentation</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+	<link href="." rel="prefix" />
+
+	<link href="./css/fivefish.min.css" rel="stylesheet" />
+
+	<script src="./js/jquery-1.7.1.min.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/bootstrap.min.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/searchindex.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/fivefish.min.js" type="text/javascript"
+		defer="defer" charset="utf-8" onload="initFivefish()"></script>
+</head>
+
+<body class="class-page">
+
+	<nav class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+
+				<a class="brand"
+					href="./index.html">RDoc Documentation</a>
+
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li>
+							<a href="#"
+								class="dropdown-toggle"
+								data-dropdown="#class-dropdown">
+								Classes
+								<b class="caret"></b>
+							</a>
+						</li>
+						<li>
+							<a href="#"
+								class="dropdown-toggle"
+								data-dropdown="#file-dropdown">
+								Files
+								<b class="caret"></b>
+							</a>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+				<span class="pull-right">
+					<form class="navbar-search">
+						<input type="hidden" id="navbar-search-target" value="" />
+						<input type="text" class="search-query" value=""
+							placeholder="Method, Class, or Filename" />
+					</form>
+				</span>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		
+		<header class="hero-unit">
+			<hgroup>
+								  												<h1 class="class"
+					rel="popover"
+					data-original-title="In files"
+					data-content="app/controllers/identity_providers_controller.rb"
+					>IdentityProvidersController</h1>
+				</p>
+							</hgroup>
+			<span class="label">class</span>
+		</header>
+
+		<section class="module-relations">
+			<dl>
+								<dt>Superclass</dt>
+								<dd class="superclass"><a href="./ApplicationController.html">ApplicationController</a></dd>
+								
+				
+							</dl>
+		</section>
+
+		<section class="description">
+			
+<p>= Identity Providers Controller</p>
+
+<p>The class allows administrators to manage the list of approved identity
+providers that can use be used to access patient records.</p>
+		</section>
+
+				<section id="5Buntitled-5D" class="documentation-section">
+			
+		    
+			
+			
+			<!-- Methods -->
+						
+			
+			
+			
+			
+			
+									
+						<section class="public-methods instance-methods methods">
+				<header>
+					<h3>Public Instance Methods</h3>
+				</header>
+
+								<a name="method-i-create">anchor</a>
+				<div id="method-i-create-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">create</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>POST /identity_providers POST /identity_providers.json</p>
+
+<p>Creates a new approved identity provider in the database.</p>					
+											<div class="method-source-code" id="create-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/identity_providers_controller.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@identity_provider</span> = <span class="ruby-constant">IdentityProvider</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">identity_provider_params</span>)
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@identity_provider</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@identity_provider</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Identity provider was successfully created.&#39;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@identity_provider</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@identity_provider</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-destroy">anchor</a>
+				<div id="method-i-destroy-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">destroy</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>DELETE /identity_providers/1 DELETE /identity_providers/1.json</p>
+
+<p>Removes an identity provider from the database.</p>					
+											<div class="method-source-code" id="destroy-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/identity_providers_controller.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@identity_provider</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">identity_providers_url</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Identity provider was successfully destroyed.&#39;</span> }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-edit">anchor</a>
+				<div id="method-i-edit-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">edit</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>GET /identity_providers/1/edit</p>
+
+<p>Retrieves the specified identity provider record from the database
+(actually done by the before action routine) and renders HTML form.</p>					
+											<div class="method-source-code" id="edit-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/identity_providers_controller.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-index">anchor</a>
+				<div id="method-i-index-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">index</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>GET /identity_providers GET /identity_providers.json</p>
+
+<p>Retrieves a list of the approved identity providers.</p>					
+											<div class="method-source-code" id="index-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/identity_providers_controller.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@identity_providers</span> = <span class="ruby-constant">IdentityProvider</span>.<span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-new">anchor</a>
+				<div id="method-i-new-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">new</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>GET /identity_providers/new</p>
+
+<p>Builds a new identity provider instance in memory and renders HTML form.</p>					
+											<div class="method-source-code" id="new-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/identity_providers_controller.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@identity_provider</span> = <span class="ruby-constant">IdentityProvider</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-show">anchor</a>
+				<div id="method-i-show-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">show</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>GET /identity_providers/1 GET /identity_providers/1.json</p>
+
+<p>Retrieves the specified identity provider record from the database
+(actually done by the before action routine).</p>					
+											<div class="method-source-code" id="show-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/identity_providers_controller.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+								<a name="method-i-update">anchor</a>
+				<div id="method-i-update-doc" class="method">
+
+					<header>
+											<i class="icon-generic"></i>
+						<span class="method-name">update</span><span 
+							class="method-args">()</span>
+										</header>
+
+					<div class="method-description">
+											<p>PATCH/PUT /identity_providers/1 PATCH/PUT /identity_providers/1.json</p>
+
+<p>Updates the attributes of an existing approved identity provider in the
+database.</p>					
+											<div class="method-source-code" id="update-source">
+							<pre class="prettyprint linenums"><code 
+								class="language-ruby"><span class="ruby-comment"># File app/controllers/identity_providers_controller.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@identity_provider</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">identity_provider_params</span>)
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@identity_provider</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Identity provider was successfully updated.&#39;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:show</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:ok</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@identity_provider</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-value">:edit</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@identity_provider</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></code></pre>
+						</div>
+										</div>
+
+					
+									</div>
+				
+			</section>
+			
+			
+			
+			
+			
+						
+		</section>
+		
+
+		<hr>
+
+		<footer>
+			<div class="container">
+				<span id="rdoc-version">Generated by RDoc 4.1.2</span> using the
+				<a id="generator-version"
+					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
+			</div>
+		</footer>
+	</div> <!-- /container -->
+
+	<!-- Class dropdown menu -->
+	<div id="class-dropdown" class="dropdown-menu has-scroll">
+	<ul>
+			<li><a href="./Application.html">Application</a></li>
+			<li><a href="./ApplicationController.html">ApplicationController</a></li>
+			<li><a href="./AuthorizationServer.html">AuthorizationServer</a></li>
+			<li><a href="./Condition.html">Condition</a></li>
+			<li><a href="./Encounter.html">Encounter</a></li>
+			<li><a href="./HomeController.html">HomeController</a></li>
+			<li><a href="./IdentityProvider.html">IdentityProvider</a></li>
+			<li><a href="./IdentityProvidersController.html">IdentityProvidersController</a></li>
+			<li><a href="./JwkController.html">JwkController</a></li>
+			<li><a href="./Medication.html">Medication</a></li>
+			<li><a href="./Observation.html">Observation</a></li>
+			<li><a href="./Organization.html">Organization</a></li>
+			<li><a href="./OrganizationsController.html">OrganizationsController</a></li>
+			<li><a href="./Patient.html">Patient</a></li>
+			<li><a href="./RecordsController.html">RecordsController</a></li>
+			<li><a href="./ResourceServer.html">ResourceServer</a></li>
+			<li><a href="./SessionsController.html">SessionsController</a></li>
+			<li><a href="./User.html">User</a></li>
+		</ul>
+	</div>
+
+	<!-- File dropdown menu -->
+	<div id="file-dropdown" class="dropdown-menu has-scroll">
+	<ul>
+			<li><a href="./app/assets/javascripts/application_js.html">application.js</a></li>
+			<li><a href="./app/assets/javascripts/bootstrap_js_coffee.html">bootstrap.js.coffee</a></li>
+			<li><a href="./app/assets/javascripts/identity_providers_js_coffee.html">identity_providers.js.coffee</a></li>
+			<li><a href="./app/assets/javascripts/organizations_js_coffee.html">organizations.js.coffee</a></li>
+			<li><a href="./app/assets/stylesheets/application_css.html">application.css</a></li>
+			<li><a href="./app/assets/stylesheets/bootstrap_and_overrides_css.html">bootstrap_and_overrides.css</a></li>
+			<li><a href="./app/assets/stylesheets/bootstrap_and_overrides_css_less.html">bootstrap_and_overrides.css.less</a></li>
+			<li><a href="./app/assets/stylesheets/identity_providers_css_scss.html">identity_providers.css.scss</a></li>
+			<li><a href="./app/assets/stylesheets/local_css.html">local.css</a></li>
+			<li><a href="./app/assets/stylesheets/organizations_css_scss.html">organizations.css.scss</a></li>
+			<li><a href="./app/assets/stylesheets/scaffolds_css_scss.html">scaffolds.css.scss</a></li>
+			<li><a href="./app/assets/stylesheets/style_css.html">style.css</a></li>
+			<li><a href="./app/views/identity_providers/index_json_jbuilder.html">index.json.jbuilder</a></li>
+			<li><a href="./app/views/identity_providers/show_json_jbuilder.html">show.json.jbuilder</a></li>
+			<li><a href="./app/views/organizations/index_json_jbuilder.html">index.json.jbuilder</a></li>
+			<li><a href="./app/views/organizations/show_json_jbuilder.html">show.json.jbuilder</a></li>
+			<li><a href="./lib/tasks/doc_rake.html">doc.rake</a></li>
+		</ul>
+	</div>
+
+</body>
+</html>

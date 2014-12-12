@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<!--
+
+  Fivefish RDoc Generator
+  $Id$
+
+  Authors:
+  - Michael Granger <ged@FaerieMUD.org>
+
+ -->
+<html lang="en">
+<head>
+	<title>RDoc Documentation</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+	<link href="." rel="prefix" />
+
+	<link href="./css/fivefish.min.css" rel="stylesheet" />
+
+	<script src="./js/jquery-1.7.1.min.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/bootstrap.min.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/searchindex.js" type="text/javascript"
+		defer="defer" charset="utf-8"></script>
+	<script src="./js/fivefish.min.js" type="text/javascript"
+		defer="defer" charset="utf-8" onload="initFivefish()"></script>
+</head>
+
+<body class="index-page">
+
+	<nav class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+
+				<a class="brand"
+					href="./index.html">RDoc Documentation</a>
+
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li>
+							<a href="#"
+								class="dropdown-toggle"
+								data-dropdown="#class-dropdown">
+								Classes
+								<b class="caret"></b>
+							</a>
+						</li>
+						<li>
+							<a href="#"
+								class="dropdown-toggle"
+								data-dropdown="#file-dropdown">
+								Files
+								<b class="caret"></b>
+							</a>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+				<span class="pull-right">
+					<form class="navbar-search">
+						<input type="hidden" id="navbar-search-target" value="" />
+						<input type="text" class="search-query" value=""
+							placeholder="Method, Class, or Filename" />
+					</form>
+				</span>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		
+		<header class="hero-unit">
+								</header>
+
+		<!-- Indexes -->
+		<section id="indexes" class="row">
+			<div class="span4">
+				<ul id="class-index" class="nav nav-list">
+					<li class="nav-header">Classes/Modules</li>
+									<li><a href="./Application.html"
+						title="Application">Application</a></li>
+									<li><a href="./ApplicationController.html"
+						title="ApplicationController">ApplicationController</a></li>
+									<li><a href="./AuthorizationServer.html"
+						title="AuthorizationServer">AuthorizationServer</a></li>
+									<li><a href="./Condition.html"
+						title="Condition">Condition</a></li>
+									<li><a href="./Encounter.html"
+						title="Encounter">Encounter</a></li>
+									<li><a href="./HomeController.html"
+						title="HomeController">HomeController</a></li>
+									<li><a href="./IdentityProvider.html"
+						title="IdentityProvider">IdentityProvider</a></li>
+									<li><a href="./IdentityProvidersController.html"
+						title="IdentityProvidersController">IdentityProvidersController</a></li>
+									<li><a href="./JwkController.html"
+						title="JwkController">JwkController</a></li>
+									<li><a href="./Medication.html"
+						title="Medication">Medication</a></li>
+									<li><a href="./Observation.html"
+						title="Observation">Observation</a></li>
+									<li><a href="./Organization.html"
+						title="Organization">Organization</a></li>
+									<li><a href="./OrganizationsController.html"
+						title="OrganizationsController">OrganizationsController</a></li>
+									<li><a href="./Patient.html"
+						title="Patient">Patient</a></li>
+									<li><a href="./RecordsController.html"
+						title="RecordsController">RecordsController</a></li>
+									<li><a href="./ResourceServer.html"
+						title="ResourceServer">ResourceServer</a></li>
+									<li><a href="./SessionsController.html"
+						title="SessionsController">SessionsController</a></li>
+									<li><a href="./User.html"
+						title="User">User</a></li>
+								</ul>
+			</div>
+
+			<div class="span4">
+				<ul id="method-index" class="nav nav-list">
+					<li class="nav-header">Methods</li>
+									<li class="method"><a title="Application"
+						href="Application.html#method-c-client_id">::client_id						<span class="method-parent">[Application]</span>
+						</a>
+					</li>
+									<li class="method"><a title="ResourceServer"
+						href="ResourceServer.html#method-c-new">::new						<span class="method-parent">[ResourceServer]</span>
+						</a>
+					</li>
+									<li class="method"><a title="AuthorizationServer"
+						href="AuthorizationServer.html#method-c-new">::new						<span class="method-parent">[AuthorizationServer]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Patient"
+						href="Patient.html#method-c-parse_from_fhir">::parse_from_fhir						<span class="method-parent">[Patient]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Encounter"
+						href="Encounter.html#method-c-parse_from_fhir">::parse_from_fhir						<span class="method-parent">[Encounter]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Observation"
+						href="Observation.html#method-c-parse_from_fhir">::parse_from_fhir						<span class="method-parent">[Observation]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Medication"
+						href="Medication.html#method-c-parse_from_fhir">::parse_from_fhir						<span class="method-parent">[Medication]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Condition"
+						href="Condition.html#method-c-parse_from_fhir">::parse_from_fhir						<span class="method-parent">[Condition]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Application"
+						href="Application.html#method-c-private_key">::private_key						<span class="method-parent">[Application]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Application"
+						href="Application.html#method-c-public_key">::public_key						<span class="method-parent">[Application]</span>
+						</a>
+					</li>
+									<li class="method"><a title="AuthorizationServer"
+						href="AuthorizationServer.html#method-i-access_token">#access_token						<span class="method-parent">[AuthorizationServer]</span>
+						</a>
+					</li>
+									<li class="method"><a title="RecordsController"
+						href="RecordsController.html#method-i-auth_endpoint_callback">#auth_endpoint_callback						<span class="method-parent">[RecordsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Organization"
+						href="Organization.html#method-i-authorization_server">#authorization_server						<span class="method-parent">[Organization]</span>
+						</a>
+					</li>
+									<li class="method"><a title="AuthorizationServer"
+						href="AuthorizationServer.html#method-i-authorize_path">#authorize_path						<span class="method-parent">[AuthorizationServer]</span>
+						</a>
+					</li>
+									<li class="method"><a title="AuthorizationServer"
+						href="AuthorizationServer.html#method-i-configuration">#configuration						<span class="method-parent">[AuthorizationServer]</span>
+						</a>
+					</li>
+									<li class="method"><a title="SessionsController"
+						href="SessionsController.html#method-i-create">#create						<span class="method-parent">[SessionsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvidersController"
+						href="IdentityProvidersController.html#method-i-create">#create						<span class="method-parent">[IdentityProvidersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="OrganizationsController"
+						href="OrganizationsController.html#method-i-create">#create						<span class="method-parent">[OrganizationsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvidersController"
+						href="IdentityProvidersController.html#method-i-destroy">#destroy						<span class="method-parent">[IdentityProvidersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="OrganizationsController"
+						href="OrganizationsController.html#method-i-destroy">#destroy						<span class="method-parent">[OrganizationsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="SessionsController"
+						href="SessionsController.html#method-i-destroy">#destroy						<span class="method-parent">[SessionsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvidersController"
+						href="IdentityProvidersController.html#method-i-edit">#edit						<span class="method-parent">[IdentityProvidersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="OrganizationsController"
+						href="OrganizationsController.html#method-i-edit">#edit						<span class="method-parent">[OrganizationsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="ResourceServer"
+						href="ResourceServer.html#method-i-get_resource">#get_resource						<span class="method-parent">[ResourceServer]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvider"
+						href="IdentityProvider.html#method-i-host">#host						<span class="method-parent">[IdentityProvider]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvidersController"
+						href="IdentityProvidersController.html#method-i-index">#index						<span class="method-parent">[IdentityProvidersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="RecordsController"
+						href="RecordsController.html#method-i-index">#index						<span class="method-parent">[RecordsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="OrganizationsController"
+						href="OrganizationsController.html#method-i-index">#index						<span class="method-parent">[OrganizationsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="HomeController"
+						href="HomeController.html#method-i-index">#index						<span class="method-parent">[HomeController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="UsersController"
+						href="UsersController.html#method-i-index">#index						<span class="method-parent">[UsersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="ApplicationHelper"
+						href="ApplicationHelper.html#method-i-is_active-3F">#is_active?						<span class="method-parent">[ApplicationHelper]</span>
+						</a>
+					</li>
+									<li class="method"><a title="JwkController"
+						href="JwkController.html#method-i-jwk">#jwk						<span class="method-parent">[JwkController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="SessionsController"
+						href="SessionsController.html#method-i-new">#new						<span class="method-parent">[SessionsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvidersController"
+						href="IdentityProvidersController.html#method-i-new">#new						<span class="method-parent">[IdentityProvidersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="OrganizationsController"
+						href="OrganizationsController.html#method-i-new">#new						<span class="method-parent">[OrganizationsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvider"
+						href="IdentityProvider.html#method-i-nickname">#nickname						<span class="method-parent">[IdentityProvider]</span>
+						</a>
+					</li>
+									<li class="method"><a title="AuthorizationServer"
+						href="AuthorizationServer.html#method-i-request_access_token">#request_access_token						<span class="method-parent">[AuthorizationServer]</span>
+						</a>
+					</li>
+									<li class="method"><a title="Organization"
+						href="Organization.html#method-i-resource_server">#resource_server						<span class="method-parent">[Organization]</span>
+						</a>
+					</li>
+									<li class="method"><a title="SessionsController"
+						href="SessionsController.html#method-i-setup">#setup						<span class="method-parent">[SessionsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="RecordsController"
+						href="RecordsController.html#method-i-show">#show						<span class="method-parent">[RecordsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvidersController"
+						href="IdentityProvidersController.html#method-i-show">#show						<span class="method-parent">[IdentityProvidersController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="OrganizationsController"
+						href="OrganizationsController.html#method-i-show">#show						<span class="method-parent">[OrganizationsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="ApplicationController"
+						href="ApplicationController.html#method-i-unknown">#unknown						<span class="method-parent">[ApplicationController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="OrganizationsController"
+						href="OrganizationsController.html#method-i-update">#update						<span class="method-parent">[OrganizationsController]</span>
+						</a>
+					</li>
+									<li class="method"><a title="IdentityProvidersController"
+						href="IdentityProvidersController.html#method-i-update">#update						<span class="method-parent">[IdentityProvidersController]</span>
+						</a>
+					</li>
+								</ul>
+			</div>
+
+			<div class="span4">
+				<ul id="file-index" class="nav nav-list">
+					<li class="nav-header">Files</li>
+									<li class="file"><a href="app/assets/javascripts/application_js.html">application.js</a></li>
+									<li class="file"><a href="app/assets/javascripts/bootstrap_js_coffee.html">bootstrap.js.coffee</a></li>
+									<li class="file"><a href="app/assets/javascripts/identity_providers_js_coffee.html">identity_providers.js.coffee</a></li>
+									<li class="file"><a href="app/assets/javascripts/organizations_js_coffee.html">organizations.js.coffee</a></li>
+									<li class="file"><a href="app/assets/stylesheets/application_css.html">application.css</a></li>
+									<li class="file"><a href="app/assets/stylesheets/bootstrap_and_overrides_css.html">bootstrap_and_overrides.css</a></li>
+									<li class="file"><a href="app/assets/stylesheets/bootstrap_and_overrides_css_less.html">bootstrap_and_overrides.css.less</a></li>
+									<li class="file"><a href="app/assets/stylesheets/identity_providers_css_scss.html">identity_providers.css.scss</a></li>
+									<li class="file"><a href="app/assets/stylesheets/local_css.html">local.css</a></li>
+									<li class="file"><a href="app/assets/stylesheets/organizations_css_scss.html">organizations.css.scss</a></li>
+									<li class="file"><a href="app/assets/stylesheets/scaffolds_css_scss.html">scaffolds.css.scss</a></li>
+									<li class="file"><a href="app/assets/stylesheets/style_css.html">style.css</a></li>
+									<li class="file"><a href="app/views/identity_providers/index_json_jbuilder.html">index.json.jbuilder</a></li>
+									<li class="file"><a href="app/views/identity_providers/show_json_jbuilder.html">show.json.jbuilder</a></li>
+									<li class="file"><a href="app/views/organizations/index_json_jbuilder.html">index.json.jbuilder</a></li>
+									<li class="file"><a href="app/views/organizations/show_json_jbuilder.html">show.json.jbuilder</a></li>
+									<li class="file"><a href="lib/tasks/doc_rake.html">doc.rake</a></li>
+								</ul>
+			</div>
+
+		</section>
+
+		<hr>
+
+		<footer>
+			<div class="container">
+				<span id="rdoc-version">Generated by RDoc 4.1.2</span> using the
+				<a id="generator-version"
+					href="http://deveiate.org/fivefish">Fivefish RDoc 0.1.0</a> generator.
+			</div>
+		</footer>
+	</div> <!-- /container -->
+
+	<!-- Class dropdown menu -->
+	<div id="class-dropdown" class="dropdown-menu has-scroll">
+	<ul>
+			<li><a href="./Application.html">Application</a></li>
+			<li><a href="./ApplicationController.html">ApplicationController</a></li>
+			<li><a href="./AuthorizationServer.html">AuthorizationServer</a></li>
+			<li><a href="./Condition.html">Condition</a></li>
+			<li><a href="./Encounter.html">Encounter</a></li>
+			<li><a href="./HomeController.html">HomeController</a></li>
+			<li><a href="./IdentityProvider.html">IdentityProvider</a></li>
+			<li><a href="./IdentityProvidersController.html">IdentityProvidersController</a></li>
+			<li><a href="./JwkController.html">JwkController</a></li>
+			<li><a href="./Medication.html">Medication</a></li>
+			<li><a href="./Observation.html">Observation</a></li>
+			<li><a href="./Organization.html">Organization</a></li>
+			<li><a href="./OrganizationsController.html">OrganizationsController</a></li>
+			<li><a href="./Patient.html">Patient</a></li>
+			<li><a href="./RecordsController.html">RecordsController</a></li>
+			<li><a href="./ResourceServer.html">ResourceServer</a></li>
+			<li><a href="./SessionsController.html">SessionsController</a></li>
+			<li><a href="./User.html">User</a></li>
+		</ul>
+	</div>
+
+	<!-- File dropdown menu -->
+	<div id="file-dropdown" class="dropdown-menu has-scroll">
+	<ul>
+			<li><a href="./app/assets/javascripts/application_js.html">application.js</a></li>
+			<li><a href="./app/assets/javascripts/bootstrap_js_coffee.html">bootstrap.js.coffee</a></li>
+			<li><a href="./app/assets/javascripts/identity_providers_js_coffee.html">identity_providers.js.coffee</a></li>
+			<li><a href="./app/assets/javascripts/organizations_js_coffee.html">organizations.js.coffee</a></li>
+			<li><a href="./app/assets/stylesheets/application_css.html">application.css</a></li>
+			<li><a href="./app/assets/stylesheets/bootstrap_and_overrides_css.html">bootstrap_and_overrides.css</a></li>
+			<li><a href="./app/assets/stylesheets/bootstrap_and_overrides_css_less.html">bootstrap_and_overrides.css.less</a></li>
+			<li><a href="./app/assets/stylesheets/identity_providers_css_scss.html">identity_providers.css.scss</a></li>
+			<li><a href="./app/assets/stylesheets/local_css.html">local.css</a></li>
+			<li><a href="./app/assets/stylesheets/organizations_css_scss.html">organizations.css.scss</a></li>
+			<li><a href="./app/assets/stylesheets/scaffolds_css_scss.html">scaffolds.css.scss</a></li>
+			<li><a href="./app/assets/stylesheets/style_css.html">style.css</a></li>
+			<li><a href="./app/views/identity_providers/index_json_jbuilder.html">index.json.jbuilder</a></li>
+			<li><a href="./app/views/identity_providers/show_json_jbuilder.html">show.json.jbuilder</a></li>
+			<li><a href="./app/views/organizations/index_json_jbuilder.html">index.json.jbuilder</a></li>
+			<li><a href="./app/views/organizations/show_json_jbuilder.html">show.json.jbuilder</a></li>
+			<li><a href="./lib/tasks/doc_rake.html">doc.rake</a></li>
+		</ul>
+	</div>
+
+</body>
+</html>
