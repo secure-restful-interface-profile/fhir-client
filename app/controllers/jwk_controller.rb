@@ -11,8 +11,6 @@ class JwkController < ApplicationController
 
   respond_to  :json
 
-  skip_before_action    :require_signin
-
   #-------------------------------------------------------------------------------
 
   ##

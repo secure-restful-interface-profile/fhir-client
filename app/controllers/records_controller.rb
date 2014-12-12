@@ -6,6 +6,7 @@
 
 class RecordsController < ApplicationController
 
+  before_action   :require_signin
   before_action   :find_organization, :except => [ :auth_endpoint_callback ]
 
   #-------------------------------------------------------------------------------

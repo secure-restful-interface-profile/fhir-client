@@ -6,6 +6,7 @@
 
 class IdentityProvidersController < ApplicationController
 
+  before_action   :require_admin
   before_action   :set_identity_provider, only: [:show, :edit, :update, :destroy]
 
   #-------------------------------------------------------------------------------

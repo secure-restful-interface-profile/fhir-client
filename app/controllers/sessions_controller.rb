@@ -7,7 +7,7 @@
 
 class SessionsController < ApplicationController
 
-  skip_before_filter   :require_signin, :only => [ :new, :create ]
+  before_filter   :require_signin, :except => [ :new, :create ]
 
   #-------------------------------------------------------------------------------
 
