@@ -29,7 +29,7 @@ class RecordsController < ApplicationController
     success = get_resource("patient")
 
     Rails.logger.debug "  ------ success = #{success} ------"
-    Rails.logger.debug "  ------ @patients.size = #{@patients.size} ------"
+    # Rails.logger.debug "  ------ @patients.size = #{@patients.size} ------"
     Rails.logger.debug "  ------ @patients = #{@patients.inspect} ------"
 
     # if success && (@patients.size == 1)
