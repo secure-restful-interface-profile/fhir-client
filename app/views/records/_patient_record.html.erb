@@ -1,64 +1,72 @@
 <% patient = @patients.first %>
 <% unless patient.nil? %>
-  <h1>
-    <%= image_tag(@organization.logo, class: "medium") %>
-    <%= [ patient["family_name"], patient["given_name"] ].join(', ') %>
-  </h1>
-  <p>
-    Birth date: <%= patient["birth_date"] %>
-  </p>
+  <div class="row">
+    <div class="col-xs-4 organization">
+      <%= image_tag(@organization.logo, class: "large") %>
+    </div>
+    <div class="col-xs-8 patient">
+      <h1><%= [ patient["family_name"], patient["given_name"] ].join(', ') %></h1>
+      <p><%= patient["gender"] %>, <%= patient["age"] %></p>
+      <p>DOB: <%= patient["birth_date"] %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <hr />
 
-  <h4>Conditions</h4>
-  <% unless @conditions.nil? || @conditions.empty? %>
-    <table class="table table-condensed table-striped conditions">
-      <tr>
-        <th>Condition</th>
-        <th>Location</th>
-        <th>Onset Date</th>
-      </tr>
-    	<%= render :partial => "condition", :collection => @conditions %>
-    </table>
-  <% else %>
-    <p>No data</p>
-  <% end %>
+      <h4>Conditions</h4>
+      <% unless @conditions.nil? || @conditions.empty? %>
+        <table class="table table-condensed table-striped conditions">
+          <tr>
+            <th>Condition</th>
+            <th>Location</th>
+            <th>Onset Date</th>
+          </tr>
+        	<%= render :partial => "condition", :collection => @conditions %>
+        </table>
+      <% else %>
+        <p>No data</p>
+      <% end %>
 
-  <h4>Medications</h4>
-  <% unless @medications.nil? || @medications.empty? %>
-    <table class="table table-condensed table-striped medications">
-      <tr>
-        <th>Type</th>
-      </tr>
-      <%= render :partial => "medication", :collection => @medications %>
-    </table>
-  <% else %>
-    <p>No data</p>
-  <% end %>
+      <h4>Medications</h4>
+      <% unless @medications.nil? || @medications.empty? %>
+        <table class="table table-condensed table-striped medications">
+          <tr>
+            <th>Type</th>
+          </tr>
+          <%= render :partial => "medication", :collection => @medications %>
+        </table>
+      <% else %>
+        <p>No data</p>
+      <% end %>
 
-  <h4>Observations</h4>
-  <% unless @observations.nil? || @observations.empty? %>
-    <table class="table table-condensed table-striped observations">
-      <tr>
-        <th>Type</th>
-        <th>Value</th>
-      </tr>
-      <%= render :partial => "observation", :collection => @observations %>
-    </table>
-  <% else %>
-    <p>No data</p>
-  <% end %>
+      <h4>Observations</h4>
+      <% unless @observations.nil? || @observations.empty? %>
+        <table class="table table-condensed table-striped observations">
+          <tr>
+            <th>Type</th>
+            <th>Value</th>
+          </tr>
+          <%= render :partial => "observation", :collection => @observations %>
+        </table>
+      <% else %>
+        <p>No data</p>
+      <% end %>
 
-  <h4>Encounters</h4>
-  <% unless @encounters.nil? || @encounters.empty? %>
-    <table class="table table-condensed table-striped encounters">
-      <tr>
-        <th>Type</th>
-        <th>Reason</th>
-        <th>Location</th>
-        <th>Date</th>
-      </tr>
-      <%= render :partial => "encounter", :collection => @encounters %>
-    </table>
-  <% else %>
-    <p>No data</p>
-  <% end %>
+      <h4>Encounters</h4>
+      <% unless @encounters.nil? || @encounters.empty? %>
+        <table class="table table-condensed table-striped encounters">
+          <tr>
+            <th>Type</th>
+            <th>Reason</th>
+            <th>Location</th>
+            <th>Date</th>
+          </tr>
+          <%= render :partial => "encounter", :collection => @encounters %>
+        </table>
+      <% else %>
+        <p>No data</p>
+      <% end %>
+    </div>
+  </div>
 <% end %>

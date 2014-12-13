@@ -20,10 +20,13 @@ class Patient
 
     fhir["entry"].map do |resource|
       patient = Hash.new
+      birth_date = Date.parse(resource["content"]["birthDate"])
 
-      patient["family_name"]   = resource["content"]["name"].first["family"]
-      patient["given_name"]    = resource["content"]["name"].first["given"]
-      patient["birth_date"]    = Date.parse(resource["content"]["birthDate"])
+      patient["family_name"]  = resource["content"]["name"].first["family"]
+      patient["given_name"]   = resource["content"]["name"].first["given"]
+      patient["birth_date"]   = birth_date
+      patient["gender"]       = resource["content"]["gender"]["coding"].first["code"] == "M" ? "Male" : "Female"
+      patient["age"]          = Time.diff(Date.today, birth_date)[:year]
       patient["id"]           = resource["id"]
 
       patients << patient
