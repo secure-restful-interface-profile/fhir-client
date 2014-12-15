@@ -21,6 +21,7 @@ class Observation
     fhir["entry"].map do |resource|
       observation = Hash.new
 
+      observation["type"]   = resource["content"]["name"]["coding"].first["display"]
       observation["date"]   = Date.parse(resource["content"]["appliesDateTime"])
       observation["value"]  = resource["content"]["component"].map do |component|
         component["valueQuantity"]["value"].to_i
