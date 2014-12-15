@@ -45,24 +45,10 @@
         <table class="table table-condensed table-striped observations">
           <tr>
             <th>Type</th>
+            <th>Date</th>
             <th>Value</th>
           </tr>
           <%= render :partial => "observation", :collection => @observations %>
-        </table>
-      <% else %>
-        <p>No data</p>
-      <% end %>
-
-      <h4>Encounters</h4>
-      <% unless @encounters.nil? || @encounters.empty? %>
-        <table class="table table-condensed table-striped encounters">
-          <tr>
-            <th>Type</th>
-            <th>Reason</th>
-            <th>Location</th>
-            <th>Date</th>
-          </tr>
-          <%= render :partial => "encounter", :collection => @encounters %>
         </table>
       <% else %>
         <p>No data</p>
