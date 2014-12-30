@@ -56,7 +56,8 @@ class ApplicationController < ActionController::Base
   # can also be accessed from views.
   
   def current_user
-    @current_user ||= session[:email]
+    @current_user ||= "admin@example.com"
+    #@current_user ||= session[:email]
   end
 
   helper_method :current_user
@@ -71,7 +72,7 @@ class ApplicationController < ActionController::Base
   #   +Boolean+::         true if user is an admin, otherwise false
 
   def is_admin?
-    @current_user && @current_user.starts_with?('admin')
+    current_user && current_user.starts_with?('admin')
   end
 
   helper_method :is_admin?
