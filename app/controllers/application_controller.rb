@@ -56,8 +56,7 @@ class ApplicationController < ActionController::Base
   # can also be accessed from views.
   
   def current_user
-    @current_user ||= "admin@example.com"
-    #@current_user ||= session[:email]
+    @current_user ||= session[:email]
   end
 
   helper_method :current_user
