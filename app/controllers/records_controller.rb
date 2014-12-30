@@ -131,6 +131,9 @@ class RecordsController < ApplicationController
     when UNAUTHORIZED
       unauthorized_request
       false
+    when FORBIDDEN
+      instance_variable_set("@#{resource.pluralize}", nil)
+      true
     when OK
       fhir = JSON.parse(response.body)
       Rails.logger.debug "----- FHIR response = #{fhir} -----"

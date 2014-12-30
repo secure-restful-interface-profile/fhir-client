@@ -15,43 +15,55 @@
       <hr />
 
       <h4>Conditions</h4>
-      <% unless @conditions.nil? || @conditions.empty? %>
-        <table class="table table-condensed table-striped conditions">
-          <tr>
-            <th>Condition</th>
-            <th>Location</th>
-            <th>Onset Date</th>
-          </tr>
-        	<%= render :partial => "condition", :collection => @conditions %>
-        </table>
+      <% unless @conditions.nil? %>
+        <% unless @conditions.empty? %>
+          <table class="table table-condensed table-striped conditions">
+            <tr>
+              <th>Condition</th>
+              <th>Location</th>
+              <th>Onset Date</th>
+            </tr>
+          	<%= render :partial => "condition", :collection => @conditions %>
+          </table>
+        <% else %>
+          <p>No data</p>
+        <% end %>
       <% else %>
-        <p>No data</p>
+        <p>Not authorized to see this data</p>
       <% end %>
 
       <h4>Medications</h4>
-      <% unless @medications.nil? || @medications.empty? %>
-        <table class="table table-condensed table-striped medications">
-          <tr>
-            <th>Type</th>
-          </tr>
-          <%= render :partial => "medication", :collection => @medications %>
-        </table>
+      <% unless @medications.nil? %>
+        <% unless @medications.empty? %>
+          <table class="table table-condensed table-striped medications">
+            <tr>
+              <th>Type</th>
+            </tr>
+            <%= render :partial => "medication", :collection => @medications %>
+          </table>
+        <% else %>
+          <p>No data</p>
+        <% end %>
       <% else %>
-        <p>No data</p>
+        <p>Not authorized to see this data</p>
       <% end %>
 
       <h4>Observations</h4>
-      <% unless @observations.nil? || @observations.empty? %>
-        <table class="table table-condensed table-striped observations">
-          <tr>
-            <th>Type</th>
-            <th>Date</th>
-            <th>Value</th>
-          </tr>
-          <%= render :partial => "observation", :collection => @observations %>
-        </table>
+      <% unless @observations.nil? %>
+        <% unless @observations.empty? %>
+          <table class="table table-condensed table-striped observations">
+            <tr>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Value</th>
+            </tr>
+            <%= render :partial => "observation", :collection => @observations %>
+          </table>
+        <% else %>
+          <p>No data</p>
+        <% end %>
       <% else %>
-        <p>No data</p>
+        <p>Not authorized to see this data</p>
       <% end %>
     </div>
   </div>
