@@ -18,6 +18,10 @@ a.btn-default:visited {
   color: #333;
 }
 
+h4 {
+  margin-top: 30px;
+}
+
 div.control-group {
   margin-bottom: 20px;
 }
@@ -67,3 +71,8 @@ img.medium {
 img.large {
   height: 150px;
 }
+
+p.warn {
+  color: red;
+}
+
