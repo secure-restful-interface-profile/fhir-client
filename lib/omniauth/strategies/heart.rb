@@ -3,16 +3,20 @@ require 'omniauth'
 module OmniAuth
   module Strategies
 
-    class DistributedTrust
+    class Heart
 
       include OmniAuth::Strategy
+      include AuthorizationServer
 
-      args [ :auth_server_uri ]
+      args [ :request, :auth_server_uri, :callback_url ]
 
       #---------------------------------------------------------------------------
 
+      ##
+      # Establish a connection with the specified authorization server.
+      
       def setup_phase
-        @authorization_server = AuthorizationServer.new(options[:auth_server_uri])
+        @authorization_server = AuthorizationServer.new(options.auth_server_uri)
         super
       end
 
@@ -26,11 +30,11 @@ module OmniAuth
       # authorization server with the authorization code.
       
       def request_phase
-        Rails.logger.debug "====== Entering DistributedTrust::request_phase ======"
+        Rails.logger.debug "====== Entering Heart::request_phase ======"
 
-        authorize_path = @authorization_server.authorize_path(callback_url)
+        authorize_path = @authorization_server.authorize_path(options.callback_url)
         Rails.logger.debug "------ Redirecting to: #{authorize_path} ------"
-        redirect_to authorize_path
+        redirect_to(authorize_path)
       end
 
       #---------------------------------------------------------------------------
@@ -45,29 +49,14 @@ module OmniAuth
       # request with the new access token.
 
       def callback_phase
-        Rails.logger.debug "====== Entering DistributedTrust::callback_phase ======"
+        Rails.logger.debug "====== Entering Heart::callback_phase ======"
 
         session["access_token"] = @authorization_server.
-                                        request_access_token(request, callback_url)
-        redirect_to organization_records_path(@organization)
-      end
+                                      request_access_token(request, 
+                                                              options.callback_url)
 
-      #---------------------------------------------------------------------------
-      private
-      #---------------------------------------------------------------------------
-
-      ##
-      # Generates the callback URL for the authorization server to use when the
-      # authorization code request is complete.  
-      #
-      # We add the organization to the URL so that we can recover the organization 
-      # in the callback.
-      #
-      # Returns:
-      #   +String+::          URL for authorization server to callback upon completion
-
-      def callback_url
-        auth_endpoint_callback_url(org: @organization.id)
+        # Retry the original request
+        redirect_to(options.request)
       end
 
     end

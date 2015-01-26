@@ -51,10 +51,10 @@ class AuthorizationServer
   # Requests a new access token from the authorization server.
   # 
   # We have received the redirect callback from the authorization server with an 
-  # authorization code.  Now we issue another request to the authorization with 
-  # that code to get an access token, this time with a JSON Web Token signed with 
-  # our private key.  We need the access token to retrieve information from the 
-  # protected resource server.
+  # authorization code.  Now we issue another request to the authorization server 
+  # with that code to get an access token, this time with a JSON Web Token signed 
+  # with our private key.  We need the access token to retrieve information from 
+  # the protected resource server.
   #
   # Params:
   #   +request_from_server+::   Request from server on authorization completion

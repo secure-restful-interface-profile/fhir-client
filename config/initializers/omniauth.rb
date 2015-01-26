@@ -1,5 +1,12 @@
 PROVIDERS = YAML.load_file(Rails.root.join('config', 'providers.yml'))[Rails.env].with_indifferent_access
 
+# Load up custom strategy
+module OmniAuth
+  module Strategies
+    autoload  :Heart, Rails.root.join('lib', 'strategies', 'heart')
+  end
+end
+
 # Use the system cert store in order to use local certs
 Rack::OAuth2.http_config do |http_client|
   http_client.ssl_config.clear_cert_store
@@ -25,6 +32,13 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       }
     }
   end
+
+  Organization.all.each do |organization|
+    provider :heart, {
+      auth_server_uri:          organization.authorization_server,
+      callback_url:             auth_endpoint_callback_url(organization.id)
+    }
+  }
 end
 
 # Setup OmniAuth error handling
