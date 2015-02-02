@@ -3,7 +3,7 @@ PROVIDERS = YAML.load_file(Rails.root.join('config', 'providers.yml'))[Rails.env
 # Load up custom strategy
 module OmniAuth
   module Strategies
-    autoload  :Heart, Rails.root.join('lib', 'strategies', 'heart')
+    autoload  :Heart, Rails.root.join('lib', 'omniauth', 'strategies', 'heart')
   end
 end
 
@@ -36,9 +36,9 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   Organization.all.each do |organization|
     provider :heart, {
       auth_server_uri:          organization.authorization_server,
-      callback_url:             auth_endpoint_callback_url(organization.id)
+      callback_url:             "/auth_endpoint_callback?org=#{organization.id}" #auth_endpoint_callback_url(organization.id)
     }
-  }
+  end
 end
 
 # Setup OmniAuth error handling
