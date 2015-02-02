@@ -13,8 +13,10 @@ Rack::OAuth2.http_config do |http_client|
   http_client.ssl_config.cert_store.set_default_paths
 end
 
-# Provide Omniauth OpenID Connect gem with identity providers we trust
+# Configure OmniAuth strategies
 Rails.application.config.middleware.use OmniAuth::Builder do
+
+  # Provide OmniAuth OpenID Connect gem with identity providers we trust
   IdentityProvider.all.each do |id_provider|
     provider :openid_connect, {
       name:                     id_provider.nickname,
@@ -33,12 +35,16 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     }
   end
 
+  # Setup OmniAuth Heart gem with organizations we're dealing with
   Organization.all.each do |organization|
     provider :heart, {
       auth_server_uri:          organization.authorization_server,
-      callback_url:             "/auth_endpoint_callback?org=#{organization.id}" #auth_endpoint_callback_url(organization.id)
+      client_id:                Application.client_id,
+      callback_url:             "/auth_endpoint_callback?org=#{organization.id}",
+      private_key:              Application.private_key
     }
   end
+
 end
 
 # Setup OmniAuth error handling

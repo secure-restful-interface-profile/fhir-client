@@ -7,7 +7,7 @@ module OmniAuth
 
       include OmniAuth::Strategy
 
-      args [ :request, :auth_server_uri, :callback_url ]
+      args [ :request, :auth_server_uri, :callback_url, :client_id, :private_key ]
 
       #---------------------------------------------------------------------------
 
@@ -153,7 +153,7 @@ module OmniAuth
           auth_response = @connection.post @configuration["introspection_endpoint"] do |request|
             # Pass access token as form data
             request.body = { 
-              "client_id"             => Application.client_id, 
+              "client_id"             => options.client_id, 
               "client_assertion_type" => "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
               "client_assertion"      => jwt_token, 
               "token"                 => access_token 
@@ -193,7 +193,7 @@ module OmniAuth
         # Sign our claims with our private key.  The authorization server will 
         # contact our jwks_uri endpoint to get our public key to decode the JWT.
 
-        JWT.encode(jwt_claims, Application.private_key, 'RS256')
+        JWT.encode(jwt_claims, options.private_key, 'RS256')
       end
 
       #-------------------------------------------------------------------------------
@@ -211,8 +211,8 @@ module OmniAuth
         now = Time.now.to_i
 
         {
-          iss: Application.client_id,               # Issuer (client ID from auth server)
-          sub: Application.client_id,               # Subject of request (client ID from auth server)
+          iss: options.client_id,                   # Issuer (client ID from auth server)
+          sub: options.client_id,                   # Subject of request (client ID from auth server)
           aud: "#{@auth_server_uri}/token",         # Intended audience (Authorization Server)
           iat: now,                                 # Time of issue
           exp: now + CLAIM_EXPIRATION,              # Expiration time
