@@ -1,12 +1,3 @@
-PROVIDERS = YAML.load_file(Rails.root.join('config', 'providers.yml'))[Rails.env].with_indifferent_access
-
-# Load up custom strategy
-module OmniAuth
-  module Strategies
-    autoload  :Heart, Rails.root.join('lib', 'omniauth', 'strategies', 'heart')
-  end
-end
-
 # Use the system cert store in order to use local certs
 Rack::OAuth2.http_config do |http_client|
   http_client.ssl_config.clear_cert_store
@@ -38,10 +29,16 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   # Setup OmniAuth Heart gem with organizations we're dealing with
   Organization.all.each do |organization|
     provider :heart, {
-      auth_server_uri:          organization.authorization_server,
-      client_id:                Application.client_id,
-      callback_url:             "/auth_endpoint_callback?org=#{organization.id}",
-      private_key:              Application.private_key
+      name:                     organization.nickname,
+      discovery:                true,
+      setup:                    true,
+
+      client_options: {
+        auth_server_uri:        organization.authorization_server_uri,
+        client_id:              Application.client_id,
+        callback_suffix:        "?org=#{organization.id}",
+        jwt_signing_key:        Application.private_key
+      }
     }
   end
 

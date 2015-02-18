@@ -7,6 +7,24 @@
 class Organization < ActiveRecord::Base
 
   ##
+  # Provides a shortened nickname for the organization for OmniAuth.
+  #
+  # For example, if the URL for the organization is 
+  # "https://organization.example.com", the nickname would be "organization".
+  #
+  # This is configuration-specific and may need to change in different 
+  # organization configurations.
+  #
+  # Returns:
+  #   +String+::          Shortened nickname for organization
+
+  def nickname
+    self.authorization_server_uri.split('.').first.split('://').last
+  end
+
+  #-------------------------------------------------------------------------------
+
+  ##
   # Initializes the interface to the authorization server for the organization.
   #
   # Returns:
