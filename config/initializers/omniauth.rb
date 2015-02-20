@@ -54,3 +54,5 @@ OmniAuth.config do |config|
   end
 end
 
+# Use standard Rails logger to write log entries
+OmniAuth.config.logger = Rails.logger
