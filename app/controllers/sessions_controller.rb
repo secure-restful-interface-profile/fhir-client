@@ -39,11 +39,11 @@ class SessionsController < ApplicationController
     Rails.logger.debug "========== Begin callback redirection from Omniauth =========="
 
     id_providers = IdentityProvider.all.map { |id_provider| id_provider.nickname }
-    if id_providers.include?(param[:provider])
+    if id_providers.include?(params[:provider])
       create_id_provider_session
     else
       organization = Organization.all.select do |org| 
-        org.nickname == param[:provider]
+        org.nickname == params[:provider]
       end
       retry_request_with_access_token(organization) unless organization.nil?
     end
@@ -133,8 +133,8 @@ class SessionsController < ApplicationController
     session[:access_token] = omniauth['credentials']['access_token']
     Rails.logger.debug "------ access_token = #{omniauth['credentials']['access_token']} ------"
 
-    Rails.logger.debug "------ Redirecting to #{organization_records_path(organization..id)} ------"
-    redirect_to organization_records_path(organization.id)
+    Rails.logger.debug "------ Redirecting to #{organization_records_path(organization)} ------"
+    redirect_to organization_records_path(organization)
   end
 
   #-------------------------------------------------------------------------------
