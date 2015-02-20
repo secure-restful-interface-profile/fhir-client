@@ -35,7 +35,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
 
       client_options: {
         auth_server_uri:        organization.authorization_server_uri,
-        client_id:              Application.client_id,
+        client_id:              organization.client_id,
         callback_suffix:        "?org=#{organization.id}",
         jwt_signing_key:        Application.private_key
       }

@@ -32,26 +32,21 @@ class SessionsController < ApplicationController
   ##
   # GET /auth/:provider/callback
   #
-  # Acts as the callback routine from the identity provider and creates and 
-  # initializes the session for signin.  Information about the user is provided
-  # as part of the callback request, which we store in the session variable.
+  # Acts as the callback routine from Omniauth at the completion of an 
+  # authentication.
 
   def create
-    Rails.logger.debug "========== Begin callback redirection from identity provider =========="
+    Rails.logger.debug "========== Begin callback redirection from Omniauth =========="
 
-    %w(auth origin params strategy).each do |attribute|
-      Rails.logger.debug "------ #{attribute}, #{request.env["omniauth.#{attribute}"].inspect} ------"
+    id_providers = IdentityProvider.all.map { |id_provider| id_provider.nickname }
+    if id_providers.include?(param[:provider])
+      create_id_provider_session
+    else
+      organization = Organization.all.select do |org| 
+        org.nickname == param[:provider]
+      end
+      retry_request_with_access_token(organization) unless organization.nil?
     end
-
-    omniauth = request.env['omniauth.auth']
-    Rails.logger.debug "------ omniauth = #{omniauth.inspect} ------"
-
-    session[:email]     = omniauth['info']['email']
-    Rails.logger.debug "------ email = #{omniauth['info']['email']} ------"
-
-    Rails.logger.debug "========== End callback redirection from identity provider =========="
-
-    redirect_to root_url, notice: "Signed in!"
   end
 
   #-------------------------------------------------------------------------------
@@ -92,6 +87,56 @@ class SessionsController < ApplicationController
 
   #-------------------------------------------------------------------------------
   private
+  #-------------------------------------------------------------------------------
+
+  ##
+  # Creates and initializes the session for signin.  Information about the user 
+  # is provided as part of the callback request, which we store in the session 
+  # variable.
+
+  def create_id_provider_session
+    Rails.logger.debug "========== Create ID provider session =========="
+
+    %w(auth origin params strategy).each do |attribute|
+      Rails.logger.debug "------ #{attribute}, #{request.env["omniauth.#{attribute}"].inspect} ------"
+    end
+
+    omniauth = request.env['omniauth.auth']
+    Rails.logger.debug "------ omniauth = #{omniauth.inspect} ------"
+
+    # Save the email returned by the identity provider to display logged in user
+    session[:email]     = omniauth['info']['email']
+    Rails.logger.debug "------ email = #{omniauth['info']['email']} ------"
+
+    Rails.logger.debug "========== End callback redirection from identity provider =========="
+
+    redirect_to root_url, notice: "Signed in!"
+  end
+
+  #-------------------------------------------------------------------------------
+
+  ##
+  # Saves access token returned by authorization server, which we store in a 
+  # session variable, and retries the request to retrieve the records from the
+  # specified organization.
+  #
+  # Params:
+  #   +organization++       Organization to retrieve records from
+
+  def retry_request_with_access_token(organization)
+    Rails.logger.debug "========== Handle auth server callback =========="
+    
+    omniauth = request.env['omniauth.auth']
+    Rails.logger.debug "------ omniauth = #{omniauth.inspect} ------"
+
+    # Save the access token returned by the authorization server for subsequent requests
+    session[:access_token] = omniauth['credentials']['access_token']
+    Rails.logger.debug "------ access_token = #{omniauth['credentials']['access_token']} ------"
+
+    Rails.logger.debug "------ Redirecting to #{organization_records_path(organization..id)} ------"
+    redirect_to organization_records_path(organization.id)
+  end
+
   #-------------------------------------------------------------------------------
 
   ##
