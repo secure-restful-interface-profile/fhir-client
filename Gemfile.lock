@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/dhill/omniauth-heart.git
-  revision: 348b2415641aaff95e9675af06dcb6b1948f2c56
+  revision: d95c3f4d5e86c54a4c44e889d4a135b292386174
   specs:
-    omniauth-heart (0.0.3)
+    omniauth-heart (0.0.4)
 
 GIT
   remote: https://github.com/dhill/omniauth-openid-connect.git
@@ -222,7 +222,7 @@ DEPENDENCIES
   jquery-rails
   less-rails
   omniauth
-  omniauth-heart (= 0.0.3)!
+  omniauth-heart (= 0.0.4)!
   omniauth-openid-connect (= 0.1.0.3)!
   rack-oauth2 (= 1.0.8.7)!
   railroady
